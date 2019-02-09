@@ -33,7 +33,7 @@
 </template>
 <script>
     import BaseInput from './../BaseInput';
-    import { Helper, AjaxCaller } from "@sscode/cms-partials";
+    import { Helper, AjaxCaller } from "@ssdcode/cms-partials";
     export default {
         name: 'single-select',
         mixins: [BaseInput, AjaxCaller],

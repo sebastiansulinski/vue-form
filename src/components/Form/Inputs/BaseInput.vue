@@ -1,7 +1,7 @@
 <script>
     import Error from "../Validator/Error";
     import Validation from '../Validator/Validation';
-    import { Helper, Disabler } from "@sscode/cms-partials";
+    import { Helper, Disabler } from "@ssdcode/cms-partials";
     export default {
         mixins: [Disabler],
         components: {

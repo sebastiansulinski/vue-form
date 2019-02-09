@@ -13,7 +13,7 @@
     </div>
 </template>
 <script>
-    import { AjaxCaller } from "@sscode/cms-partials";
+    import { AjaxCaller } from "@ssdcode/cms-partials";
     export default {
         name: 'top-dialog',
         mixins: [AjaxCaller],

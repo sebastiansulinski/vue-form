@@ -1,4 +1,4 @@
-import { Helper } from "@sscode/cms-partials";
+import { Helper } from "@ssdcode/cms-partials";
 
 export default class Rule {
 

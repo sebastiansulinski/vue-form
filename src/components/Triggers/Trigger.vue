@@ -1,5 +1,5 @@
 <script>
-    import { Disabler, Processor } from "@sscode/cms-partials";
+    import { Disabler, Processor } from "@ssdcode/cms-partials";
     export default {
         mixins: [Disabler, Processor],
         props: {

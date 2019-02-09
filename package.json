@@ -13,9 +13,9 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@sscode/cms-partials": "^0.1.5",
-    "@sscode/vue-event-bus": "^0.1.1",
-    "@sscode/vue-focus-directive": "^0.1.1",
+    "@ssdcode/cms-partials": "^0.1.1",
+    "@ssdcode/vue-event-bus": "^0.1.0",
+    "@ssdcode/vue-focus-directive": "^0.1.2",
     "vue": "^2.6.4"
   },
   "devDependencies": {

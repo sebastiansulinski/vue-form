@@ -1,7 +1,7 @@
 <script>
     import Trigger from './Trigger';
     import Behaviour from './Behaviour';
-    import { AjaxCaller } from "@sscode/cms-partials";
+    import { AjaxCaller } from "@ssdcode/cms-partials";
     import MultiHandler from './../../mixins/MultiHandler';
     export default {
         name: 'multi-checkbox-trigger',

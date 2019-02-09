@@ -22,7 +22,7 @@
     import Behaviour from './Behaviour';
     import Error from './Validator/Error';
     import Validator from './Validator/Validator';
-    import { Helper, Disabler, AjaxCaller } from "@sscode/cms-partials";
+    import { Helper, Disabler, AjaxCaller } from "@ssdcode/cms-partials";
     export default {
         name: 'form-wrapper',
         mixins: [AjaxCaller, Disabler],
