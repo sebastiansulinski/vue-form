@@ -624,6 +624,8 @@ import VueForm from './wrapper.js';
 
 export default {
   name: 'app',
-  components: VueForm,
+  components: {
+      ...VueForm
+  }
 }
 </script>
