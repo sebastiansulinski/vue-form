@@ -1,0 +1,59 @@
+{
+  "name": "@ssdcode/vue-form",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sebastiansulinski/vue-form.git"
+  },
+  "homepage": "https://github.com/sebastiansulinski/vue-form#readme",
+  "main": "./dist/vue-form.common.js",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build --target lib --name vue-form ./src/wrapper.js",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@sscode/cms-partials": "^0.1.5",
+    "@sscode/vue-event-bus": "^0.1.1",
+    "@sscode/vue-focus-directive": "^0.1.1",
+    "vue": "^2.6.4"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.4.0",
+    "@vue/cli-plugin-eslint": "^3.4.0",
+    "@vue/cli-service": "^3.4.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.13.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "foundation-sites": "^6.5.3",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
+    "vue-template-compiler": "^2.6.4"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {
+      "no-console": "off"
+    },
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
