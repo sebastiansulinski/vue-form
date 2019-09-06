@@ -1,29 +1,11 @@
-<template>
-    <label :for="id" v-if="showLabel">
-        <span v-if="label" v-text="label"></span>
-        <span class="validation" v-show="show">
-            <span
-                :class="cssClass"
-                v-for="(message, rule) in validation"
-                :key="rule"
-                v-show="showError(rule)"
-                v-text="message"
-            ></span>
-        </span>
-    </label>
-</template>
 <script>
     import Error from "./Error";
     export default {
-        name: 'form-validation',
+        name: 'base-form-validation',
         props: {
             label: {
                 type: String,
                 required: false
-            },
-            id: {
-                type: String,
-                required: true
             },
             name: {
                 type: String,
@@ -32,10 +14,6 @@
             show: {
                 type: Boolean,
                 default: false
-            },
-            cssClass: {
-                type: [Array, Object, String],
-                required: false
             },
             validation: {
                 type: [Array, Object],
@@ -52,9 +30,16 @@
             }
         },
         methods: {
-            showError(rule) {
+            showErrorFor(rule) {
                 return this.error.has(this.name, rule.split(':')[0]);
             }
+        },
+        render() {
+            return this.$scopedSlots.default({
+                showLabel: this.showLabel,
+                showErrorFor: this.showErrorFor,
+                validation: this.validation,
+            });
         }
     }
 </script>

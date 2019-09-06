@@ -611,6 +611,8 @@
 
     </form-wrapper>
 
+    <button type="button" class="button" @click="confirm">CONFIRMATION DIALOG</button>
+
     <!-- top dialog -->
 
     <top-dialog></top-dialog>
@@ -623,9 +625,19 @@
 import VueForm from './wrapper.js';
 
 export default {
-  name: 'app',
-  components: {
-      ...VueForm
-  }
+    name: 'app',
+    components: {
+        ...VueForm
+    },
+    methods: {
+      confirm() {
+          window.EventBus.fire('top-confirm', {
+              id: 'confirmation',
+              message: 'Are you sure you wish to remove it?',
+              url: '/',
+              method: 'get',
+          });
+      }
+    }
 }
 </script>

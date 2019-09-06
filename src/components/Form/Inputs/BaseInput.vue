@@ -1,12 +1,10 @@
 <script>
     import Error from "../Validator/Error";
-    import Validation from '../Validator/Validation';
+    import FormValidation from '../Validator/FormValidation';
     import { Helper, Disabler } from "@ssdcode/cms-partials";
     export default {
         mixins: [Disabler],
-        components: {
-            'form-validation': Validation
-        },
+        components: { FormValidation },
         props: {
             group: {
                 type: String,

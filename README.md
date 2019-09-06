@@ -53,7 +53,7 @@ const app = new Vue({
 
 ## Styles
 
-Package comes with 2 `scss` files to style your components
+Package comes with 2 `scss` files to style your components, but you can use your own styling if you've decided to use a different structure for `form-validation`, `top-dialog`. I recommend to check these files in case you need some of the styling for your particular case.
 
 ```javascript
 src/styles/components/_form.scss

@@ -1,6 +1,8 @@
+import BaseTopDialog from './components/Dialogs/BaseTopDialog';
 import TopDialog from './components/Dialogs/TopDialog';
 import FormWrapper from './components/Form/Wrapper';
-import FormValidation from './components/Form/Validator/Validation';
+import BaseFormValidation from './components/Form/Validator/BaseFormValidation';
+import FormValidation from './components/Form/Validator/FormValidation';
 import FormTrigger from './components/Triggers/FormTrigger';
 import MultiCheckboxTrigger from './components/Triggers/MultiCheckboxTrigger';
 import DateInput from './components/Form/Inputs/Input/Date';
@@ -21,8 +23,10 @@ import TextArea from './components/Form/Inputs/TextArea/TextArea';
 import WysiwygEditor from './components/Form/Inputs/TextArea/Wysiwyg';
 
 const Components = {
+    BaseTopDialog,
     TopDialog,
     FormWrapper,
+    BaseFormValidation,
     FormValidation,
     FormTrigger,
     MultiCheckboxTrigger,
