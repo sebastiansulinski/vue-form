@@ -22,6 +22,8 @@ import MultiSelect from './components/Form/Inputs/Select/Multi';
 import TextArea from './components/Form/Inputs/TextArea/TextArea';
 import WysiwygEditor from './components/Form/Inputs/TextArea/Wysiwyg';
 
+import Error from "./components/Form/Validator/Error";
+
 const Components = {
     BaseTopDialog,
     TopDialog,
@@ -46,6 +48,7 @@ const Components = {
     MultiSelect,
     TextArea,
     WysiwygEditor,
+    Error,
 };
 
 // Declare install function executed by Vue.use()
