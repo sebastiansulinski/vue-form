@@ -2,7 +2,6 @@ export default class Behaviour {
 
     static confirmWithDialogAndReset(form, response) {
 
-        form.stopProcessingAjaxCall();
         form.reset();
 
         Behaviour.confirm(form, response);
@@ -10,13 +9,15 @@ export default class Behaviour {
 
     static confirmWithDialogAndClear(form, response) {
 
-        form.stopProcessingAjaxCall();
         form.clear();
 
         Behaviour.confirm(form, response);
     }
 
     static confirm(form, response) {
+
+        form.stopProcessingAjaxCall();
+
         window.EventBus.fire('top-alert', {
             id: form.group,
             message: response.data.message,
