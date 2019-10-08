@@ -7,9 +7,13 @@
 
       <div class="cell small-12 medium-3 large-2">
 
-        <form-trigger group="update-form" fire="submit" v-cloak>
+        <form-trigger
+            group="update-form"
+            fire="submit"
+            v-slot:default="{ isDisabled, trigger, processing }"
+            v-cloak
+        >
             <span
-                slot-scope="{ isDisabled, trigger, processing }"
                 class="expanded button"
                 :class="{ disabled: isDisabled }"
                 @click="trigger"
@@ -32,10 +36,10 @@
           <form-trigger
               group="update-form"
               fire="disable-started"
+              v-slot:default="{ isDisabled, trigger }"
               v-cloak
           >
               <span
-                  slot-scope="{ isDisabled, trigger }"
                   class="secondary button"
                   @click="trigger"
                   v-if="!isDisabled"
@@ -47,11 +51,11 @@
           <form-trigger
               group="update-form"
               fire="disable-ended"
-              v-cloak
+              v-slot:default="{ isDisabled, trigger }"
               :always-enabled="true"
+              v-cloak
           >
               <span
-                  slot-scope="{ isDisabled, trigger }"
                   class="success button"
                   @click="trigger"
                   v-if="isDisabled"
@@ -60,9 +64,12 @@
               </span>
           </form-trigger>
 
-          <form-trigger group="update-form" fire="reset" v-cloak>
+          <form-trigger
+              group="update-form"
+              fire="reset"
+              v-slot:default="{ isDisabled, trigger, processing }"
+              v-cloak>
               <span
-                  slot-scope="{ isDisabled, trigger, processing }"
                   class="alert button"
                   :class="{ disabled: isDisabled }"
                   @click="trigger"
@@ -76,9 +83,12 @@
               </span>
           </form-trigger>
 
-          <form-trigger group="update-form" fire="clear" v-cloak>
+          <form-trigger
+              group="update-form"
+              fire="clear"
+              v-slot:default="{ isDisabled, trigger, processing }"
+              v-cloak>
               <span
-                  slot-scope="{ isDisabled, trigger, processing }"
                   class="warning button"
                   :class="{ disabled: isDisabled }"
                   @click="trigger"
@@ -104,10 +114,7 @@
       group="update-form"
       action="/"
       :collections="{ address: {}, colours: [], fruit: [] }"
-      v-cloak
-    >
-
-      <div slot-scope="{
+      v-slot:default="{
             group,
             fields,
             error,
@@ -117,8 +124,9 @@
             clear,
             disableEvent,
             enableEvent
-       }">
-
+      }"
+      v-cloak
+    >
         <fieldset class="fieldset">
 
           <legend>Personal details</legend>
@@ -533,7 +541,7 @@
           :error="error"
           :disabled="isDisabled"
         >
-          <div slot="body">Content goes here</div>
+          <template v-slot:body>Content goes here</template>
         </text-area>
 
         <wysiwyg-editor
@@ -549,61 +557,59 @@
           :config="{ height: '30rem' }"
           :disabled="isDisabled"
         >
-          <div slot="body">&lt;h1&gt;Body&lt;/h1&gt;</div>
+          <template v-slot:body>&lt;h1&gt;Body&lt;/h1&gt;</template>
         </wysiwyg-editor>
 
         <div class="divider"></div>
 
-          <div class="grid-x">
+      <div class="grid-x">
 
-              <div class="cell small-12 medium-3 large-2">
+          <div class="cell small-12 medium-3 large-2">
 
-                  <button
-                      type="submit"
-                      class="expanded button"
-                      v-show="!processing"
-                      :disabled="isDisabled"
-                  ><i class="fas fa-check fa-fw"></i> SUBMIT</button>
+              <button
+                  type="submit"
+                  class="expanded button"
+                  v-show="!processing"
+                  :disabled="isDisabled"
+              ><i class="fas fa-check fa-fw"></i> SUBMIT</button>
+              <button
+                  type="button"
+                  disabled
+                  class="button"
+                  v-show="processing"
+              ><i class="fas fa-spinner fa-spin fa-fw"></i> PROCESSING</button>
+
+          </div>
+
+          <div class="cell small-12 medium-6 large-4 medium-offset-3 large-offset-6 medium-text-right">
+
+              <nav class="expanded button-group">
                   <button
                       type="button"
-                      disabled
-                      class="button"
-                      v-show="processing"
-                  ><i class="fas fa-spinner fa-spin fa-fw"></i> PROCESSING</button>
+                      class="secondary button"
+                      @click="disableEvent"
+                      v-if="!isDisabled"
+                  ><i class="fas fa-power-off fa-fw"></i> DISABLE</button>
+                  <button
+                      type="button"
+                      class="success button"
+                      @click="enableEvent"
+                      v-if="isDisabled"
+                  ><i class="fas fa-power-off fa-fw"></i> ENABLE</button>
+                  <button
+                      type="button"
+                      class="alert button"
+                      @click="reset"
+                      :disabled="isDisabled"
+                  ><i class="fas fa-eraser fa-fw"></i> RESET</button>
+                  <button
+                      type="button"
+                      class="warning button"
+                      @click="clear"
+                      :disabled="isDisabled"
+                  ><i class="fas fa-times fa-fw"></i> CLEAR</button>
 
-              </div>
-
-              <div class="cell small-12 medium-6 large-4 medium-offset-3 large-offset-6 medium-text-right">
-
-                  <nav class="expanded button-group">
-                      <button
-                          type="button"
-                          class="secondary button"
-                          @click="disableEvent"
-                          v-if="!isDisabled"
-                      ><i class="fas fa-power-off fa-fw"></i> DISABLE</button>
-                      <button
-                          type="button"
-                          class="success button"
-                          @click="enableEvent"
-                          v-if="isDisabled"
-                      ><i class="fas fa-power-off fa-fw"></i> ENABLE</button>
-                      <button
-                          type="button"
-                          class="alert button"
-                          @click="reset"
-                          :disabled="isDisabled"
-                      ><i class="fas fa-eraser fa-fw"></i> RESET</button>
-                      <button
-                          type="button"
-                          class="warning button"
-                          @click="clear"
-                          :disabled="isDisabled"
-                      ><i class="fas fa-times fa-fw"></i> CLEAR</button>
-
-                  </nav>
-
-              </div>
+              </nav>
 
           </div>
 

@@ -39,7 +39,7 @@
         },
         data() {
             return {
-                currentBody: this.$slots.body ? this.$slots.body[0].children[0].text : '',
+                currentBody: '',
                 body: ''
             }
         },
@@ -58,6 +58,7 @@
             }
         },
         mounted() {
+            this.currentBody = this.$slots.body ? this.$slots.body[0].text : '';
             this.reset();
             this.initialize();
             this.registerListeners();
@@ -67,7 +68,7 @@
                 this.emit(this.body = this.currentBody);
             },
             clear() {
-                this.emit(this.body = '');
+                this.emit(this.body = null);
             }
         }
     }

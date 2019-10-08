@@ -32,7 +32,7 @@
         },
         data() {
             return {
-                currentBody: this.$slots.body ? this.$slots.body[0].children[0].text : '',
+                currentBody: '',
                 editor: null,
                 default: {
                     toolbar: this.toolbar(),
@@ -55,6 +55,7 @@
             if (typeof window.CKEDITOR === 'undefined') {
                 return;
             }
+            this.currentBody = this.$slots.body ? this.$slots.body[0].text : '';
             this.makeEditor();
             this.initialize();
             this.registerListeners();
