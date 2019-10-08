@@ -82,10 +82,7 @@ Include `<top-dialog>` just before the closing div with id `#app` (or whichever 
 <form-wrapper 
     group="update-form"
     action="/"
-    v-cloak
->
-
-    <div slot-scope="{
+    v-slot:default="{
         group,
         fields,
         error,
@@ -95,12 +92,10 @@ Include `<top-dialog>` just before the closing div with id `#app` (or whichever 
         clear,
         disableEvent,
         enableEvent
-    }">
-
-        //... form inputs and buttons go here
-
-    </div>
-
+    }"
+    v-cloak
+>
+    //... form inputs and buttons go here
 </form-wrapper>
 ```
 
@@ -110,15 +105,10 @@ or if you are providing support for older browsers that do not support object de
 <form-wrapper 
     group="update-form"
     action="/"
+    v-slot:default="props"
     v-cloak
 >
-
-    <div slot-scope="props">
-
-        //... form inputs and buttons go here
-
-    </div>
-
+    //... form inputs and buttons go here
 </form-wrapper>
 ```
 
@@ -447,8 +437,8 @@ or with both, `body` and `validation`
     :error="error"
     :disabled="isDisabled"
 >   
-    <div slot="body">Content goes here</div>    
-    <div slot="validation">
+    <template v-slot:body>Content goes here</template>    
+    <template v-slot:validation>
         <form-validation
             id="colours"
             name="colours"
@@ -461,7 +451,7 @@ or with both, `body` and `validation`
             :error="error"
             css-class="block"
         ></form-validation>
-    </div>    
+    </template>    
 </text-area>
 ```
 
@@ -491,7 +481,7 @@ This component takes additional 2 properties `components-css`, which is the path
     :config="{ height: '30rem' }"
     :disabled="isDisabled"
 >
-    <div slot="body">&lt;h1&gt;Body&lt;/h1&gt;</div>
+    <template v-slot:body>&lt;h1&gt;Body&lt;/h1&gt;</template>
 </wysiwyg-editor>
 ```
 
@@ -507,10 +497,7 @@ To interact with the form, you can either use buttons within the `form-wrapper`
 <form-wrapper 
     group="update-form"
     action="/"
-    v-cloak
->
-
-    <div slot-scope="{
+    v-slot:default="{
         group,
         fields,
         error,
@@ -520,51 +507,50 @@ To interact with the form, you can either use buttons within the `form-wrapper`
         clear,
         disableEvent,
         enableEvent
-    }">
+    }"
+    v-cloak
+>    
+    // ...
+
+    <button
+        type="submit"
+        class="expanded button"
+        v-show="!processing"
+        :disabled="isDisabled"
+    ><i class="fas fa-check fa-fw"></i> SUBMIT</button>
+    <button
+        type="button"
+        disabled
+        class="button"
+        v-show="processing"
+    ><i class="fas fa-spinner fa-spin fa-fw"></i> PROCESSING</button>
     
-        // ...
+    <button
+        type="button"
+        class="secondary button"
+        @click="disableEvent"
+        v-if="!isDisabled"
+    ><i class="fas fa-power-off fa-fw"></i> DISABLE</button>
+    <button
+        type="button"
+        class="success button"
+        @click="enableEvent"
+        v-if="isDisabled"
+    ><i class="fas fa-power-off fa-fw"></i> ENABLE</button>
     
-        <button
-            type="submit"
-            class="expanded button"
-            v-show="!processing"
-            :disabled="isDisabled"
-        ><i class="fas fa-check fa-fw"></i> SUBMIT</button>
-        <button
-            type="button"
-            disabled
-            class="button"
-            v-show="processing"
-        ><i class="fas fa-spinner fa-spin fa-fw"></i> PROCESSING</button>
-        
-        <button
-            type="button"
-            class="secondary button"
-            @click="disableEvent"
-            v-if="!isDisabled"
-        ><i class="fas fa-power-off fa-fw"></i> DISABLE</button>
-        <button
-            type="button"
-            class="success button"
-            @click="enableEvent"
-            v-if="isDisabled"
-        ><i class="fas fa-power-off fa-fw"></i> ENABLE</button>
-        
-        <button
-            type="button"
-            class="alert button"
-            @click="reset"
-            :disabled="isDisabled"
-        ><i class="fas fa-eraser fa-fw"></i> RESET</button>
-        
-        <button
-            type="button"
-            class="warning button"
-            @click="clear"
-            :disabled="isDisabled"
-        ><i class="fas fa-times fa-fw"></i> CLEAR</button>
+    <button
+        type="button"
+        class="alert button"
+        @click="reset"
+        :disabled="isDisabled"
+    ><i class="fas fa-eraser fa-fw"></i> RESET</button>
     
-    </div>
+    <button
+        type="button"
+        class="warning button"
+        @click="clear"
+        :disabled="isDisabled"
+    ><i class="fas fa-times fa-fw"></i> CLEAR</button>
     
 </form-wrapper>
 ```
@@ -582,9 +568,13 @@ There are several events that a `form-wrapper` is listening to:
 
 
 ```html
-<form-trigger group="update-form" fire="submit" v-cloak>
+<form-trigger 
+    group="update-form" 
+    fire="submit" 
+    v-slot:default="{ isDisabled, trigger, processing }"
+    v-cloak
+>
     <span
-        slot-scope="{ isDisabled, trigger, processing }"
         class="expanded button"
         :class="{ disabled: isDisabled }"
         @click="trigger"
@@ -601,10 +591,10 @@ There are several events that a `form-wrapper` is listening to:
 <form-trigger
     group="update-form"
     fire="disable-started"
+    v-slot:default="{ isDisabled, trigger }"
     v-cloak
 >
     <span
-        slot-scope="{ isDisabled, trigger }"
         class="secondary button"
         @click="trigger"
         v-if="!isDisabled"
@@ -616,11 +606,11 @@ There are several events that a `form-wrapper` is listening to:
 <form-trigger
     group="update-form"
     fire="disable-ended"
-    v-cloak
     :always-enabled="true"
+    v-slot:default="{ isDisabled, trigger }"
+    v-cloak
 >
-    <span
-        slot-scope="{ isDisabled, trigger }"
+    <span        
         class="success button"
         @click="trigger"
         v-if="isDisabled"
@@ -629,9 +619,13 @@ There are several events that a `form-wrapper` is listening to:
     </span>
 </form-trigger>
 
-<form-trigger group="update-form" fire="reset" v-cloak>
-    <span
-        slot-scope="{ isDisabled, trigger, processing }"
+<form-trigger 
+    group="update-form" 
+    fire="reset" 
+    v-slot:default="{ isDisabled, trigger, processing }"
+    v-cloak
+>
+    <span        
         class="alert button"
         :class="{ disabled: isDisabled }"
         @click="trigger"
@@ -645,9 +639,13 @@ There are several events that a `form-wrapper` is listening to:
     </span>
 </form-trigger>
 
-<form-trigger group="update-form" fire="clear" v-cloak>
+<form-trigger 
+    group="update-form" 
+    fire="clear" 
+    v-slot:default="{ isDisabled, trigger, processing }"
+    v-cloak
+>
     <span
-        slot-scope="{ isDisabled, trigger, processing }"
         class="warning button"
         :class="{ disabled: isDisabled }"
         @click="trigger"
