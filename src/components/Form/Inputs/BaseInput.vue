@@ -111,8 +111,12 @@
         },
         methods: {
             emit(value, event = 'input') {
+                value = this.mutate(value);
                 this.emitFireEvent(value);
                 this.$emit(event, value);
+            },
+            mutate(value) {
+                return value;
             },
             emitFireEvent(value) {
                 if (this.fire) {
