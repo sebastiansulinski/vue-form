@@ -1,20 +1,20 @@
 <template>
     <form @submit.prevent="submit" novalidate>
         <slot
-            :group="group"
-            :fields="fields"
-            :summary="summaryBag"
-            :validation="validationBag"
-            :error="error"
-            :reset="reset"
-            :clear="clear"
-            :submit="submit"
-            :enable="enable"
-            :disable="disable"
-            :enableEvent="enableEvent"
-            :disableEvent="disableEvent"
-            :processing="processing"
-            :isDisabled="isDisabled"
+                :group="group"
+                :fields="fields"
+                :summary="summaryBag"
+                :validation="validationBag"
+                :error="error"
+                :reset="reset"
+                :clear="clear"
+                :submit="submit"
+                :enable="enable"
+                :disable="disable"
+                :enableEvent="enableEvent"
+                :disableEvent="disableEvent"
+                :processing="processing"
+                :isDisabled="isDisabled"
         ></slot>
     </form>
 </template>
@@ -144,14 +144,15 @@
                 this.validate().then(this.makeCall).catch(this.callFailed);
             },
             validate() {
+
+                this.error = new Error;
+
                 return new Promise((resolve, reject) => {
 
                     if (!this.requiresValidation()) {
                         resolve();
                         return;
                     }
-
-                    this.error = new Error;
 
                     new Validator(this, resolve, reject);
                 });
@@ -176,10 +177,18 @@
                 }
             },
             callFailed(error) {
-                if (error.response && error.response.errors) {
-                    this.error.set(error.response.errors);
+                if (((error.response || {}).data || {}).errors) {
+                    this.setServerErrors(error.response.data.errors);
                 }
                 window.ErrorHandler.showError(error, this.stopProcessingAjaxCall);
+            },
+            setServerErrors(errors) {
+
+                Object.keys(errors).forEach(key => {
+                    errors[key] = errors[key][0];
+                });
+
+                this.error.set(errors);
             }
         }
     }
