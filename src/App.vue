@@ -113,6 +113,7 @@
     <form-wrapper
       group="update-form"
       action="/"
+      behaviour="sleep"
       :collections="{ address: {}, colours: [], fruit: [] }"
       v-slot:default="{
             group,

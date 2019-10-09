@@ -176,6 +176,9 @@
                 }
             },
             callFailed(error) {
+                if (error.response && error.response.errors) {
+                    this.error.set(error.response.errors);
+                }
                 window.ErrorHandler.showError(error, this.stopProcessingAjaxCall);
             }
         }
