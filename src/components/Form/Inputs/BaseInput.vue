@@ -83,6 +83,10 @@
             fire: {
                 type: String,
                 required: false
+            },
+            inputBindings: {
+                type: Object,
+                default: () => { return {} }
             }
         },
         data() {
@@ -107,6 +111,9 @@
             },
             computedWrapperCssStyle() {
                 return { [this.wrapperErrorCssStyle]: this.isInvalid }
+            },
+            attributeBindings() {
+                return this.inputBindings;
             }
         },
         methods: {

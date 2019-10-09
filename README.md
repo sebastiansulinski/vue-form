@@ -187,6 +187,7 @@ time-input
 datetime-input
 hidden-input
 number-input
+float-input
 ```
 
 #### Radio input
@@ -675,3 +676,24 @@ There are several events that a `form-wrapper` is listening to:
 ## Depending dropdowns
 
 // todo
+
+## Additional attribute bindings
+
+If you'd like to add some additional attribute bindings to your form input you can use `:input-bindings` attribute.
+Example would be adding `step`, `min` and `max` attributes to the `number-input`:
+
+```html
+<number-input
+    :group="group"
+    label="Price: *"
+    name="price"
+    v-model="fields.price"
+    :validation="{
+        'required': 'Please provide the price',
+    }"
+    :error="error"
+    :disabled="isDisabled"
+    current-value="20.22"
+    :input-bindings="{ step: '.01', min: 0, max: 1000.00 }"
+></number-input>
+```

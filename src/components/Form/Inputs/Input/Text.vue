@@ -23,6 +23,7 @@
             v-focus="focus"
             v-on="inputListeners"
             :disabled="isDisabled"
+            v-bind="attributeBindings"
         >
     </div>
 </template>

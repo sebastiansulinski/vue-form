@@ -174,7 +174,21 @@
 
             </div>
 
-            <div class="cell small-12 medium-6"></div>
+            <div class="cell small-12 medium-6">
+
+                <float-input
+                    :group="group"
+                    label="Price: *"
+                    name="price"
+                    v-model="fields.price"
+                    :validation="{
+                        'required': 'Please provide the price',
+                    }"
+                    :error="error"
+                    :disabled="isDisabled"
+                ></float-input>
+
+            </div>
 
             <div class="cell small-12 medium-6">
 

@@ -8,6 +8,7 @@ import MultiCheckboxTrigger from './components/Triggers/MultiCheckboxTrigger';
 import DateInput from './components/Form/Inputs/Input/Date';
 import DateTimeInput from './components/Form/Inputs/Input/DateTime';
 import EmailInput from './components/Form/Inputs/Input/Email';
+import FloatInput from './components/Form/Inputs/Input/Float';
 import HiddenInput from './components/Form/Inputs/Input/Hidden';
 import NumberInput from './components/Form/Inputs/Input/Number';
 import PasswordInput from './components/Form/Inputs/Input/Password';
@@ -35,6 +36,7 @@ const Components = {
     DateInput,
     DateTimeInput,
     EmailInput,
+    FloatInput,
     HiddenInput,
     NumberInput,
     PasswordInput,
