@@ -48,7 +48,7 @@ export default class Validator {
                         }
 
                     } catch (error) {
-                        reject("Invalid form validation rule '" + rule + "'.");
+                        // reject("Invalid form validation rule '" + rule + "'.");
                     }
                 }
 

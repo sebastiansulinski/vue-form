@@ -43,7 +43,7 @@ export default class Rule {
 
     static password(value) {
         return Rule.validateIfNotEmpty(value, () => {
-            const pattern = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$!%*?&])[A-Za-z\\d@#$!%*?&]{6,30}$');
+            const pattern = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$!%*?&])[A-Za-z\\d@#$!%*?&]{8,30}$');
             return pattern.test(value);
         });
     }
