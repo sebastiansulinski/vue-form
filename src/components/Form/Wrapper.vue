@@ -35,6 +35,10 @@
                 type: String,
                 required: false
             },
+            mutators: {
+                type: Object,
+                default: () => { return {} }
+            },
             eventSubmitOnly: {
                 type: Boolean,
                 default: false
@@ -58,7 +62,7 @@
         },
         computed: {
             requestData() {
-                return this.fields;
+                return this.mutate({...this.fields});
             },
         },
         created() {
@@ -97,6 +101,15 @@
             disable() {
                 this.clearNotifications();
                 Disabler.methods.disable.call(this);
+            },
+            mutate(fields) {
+                if (Object.keys(this.mutators).length === 0) {
+                    return fields;
+                }
+                Object.keys(this.mutators).forEach(key => {
+                    fields[key] = this.mutators[key](fields[key]);
+                });
+                return fields;
             },
             enableEvent() {
                 window.EventBus.fire('disable-ended-' + this.group);

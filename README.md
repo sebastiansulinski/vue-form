@@ -697,3 +697,54 @@ Example would be adding `step`, `min` and `max` attributes to the `number-input`
     :input-bindings="{ step: '.01', min: 0, max: 1000.00 }"
 ></number-input>
 ```
+
+## Mutating values for the request
+
+Sometimes you might want to have a value represented in one format, but send it in another.
+Example of such situation could be the `price` where input uses `float` format, but server expects `integer` i.e. `pounds` vs `pence` / `dollars` vs `cents`.
+
+For this sort of scenarios you can use `mutators` attribute on the `form-wrapper` in the form of the object with keys representing the field to mutate and value - callback function to mutate the entered value.
+
+```html
+<form-wrapper
+  group="update-form"
+  action="/"
+  behaviour="redirect"
+  v-slot:default="{
+    group,
+    fields,
+    error,
+    isDisabled,
+    processing,
+    reset,
+    clear,
+    disableEvent,
+    enableEvent
+  }"
+  :mutators="{ price: value => parseInt(value.replace('.', '')) }"
+  v-cloak
+>
+    //...
+    
+    <float-input
+        :group="group"
+        name="price"
+        label="Price: *"
+        v-model="fields.price"
+        current-value="2257"
+        :validation="{
+            'required': 'Please provide the price',
+            'integer': 'Invalid price format',
+        }"
+        :error="error"
+        :disabled="isDisabled"
+    ></float-input>
+
+    //...
+</form-wrapper>
+```
+
+The above form will send the request with value for `price` index an integer of `2257`.
+Please note that `current-value` is also provided as `integer` type - this will automatically be converted to a `float` when the component is created and allows to pass the value directly from the database without necessity of manually converting it to the decimal point.
+
+Float input has `:decimals` property that determines the number of decimal places, for example `:decimals="3"` would display 3 digits after the decimal point.

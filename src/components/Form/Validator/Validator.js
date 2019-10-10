@@ -4,7 +4,7 @@ export default class Validator {
 
     constructor(wrapper, resolve, reject) {
 
-        this.fields = wrapper.fields;
+        this.fields = wrapper.requestData;
         this.validationBag = wrapper.validationBag;
         this.errors = {};
 

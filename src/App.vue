@@ -126,6 +126,7 @@
             disableEvent,
             enableEvent
       }"
+      :mutators="{ price: value => parseInt(value.replace('.', '')) }"
       v-cloak
     >
         <fieldset class="fieldset">
@@ -184,6 +185,7 @@
                     v-model="fields.price"
                     :validation="{
                         'required': 'Please provide the price',
+                        'integer': 'Invalid price format',
                     }"
                     :error="error"
                     :disabled="isDisabled"
