@@ -15,14 +15,14 @@
   },
   "dependencies": {
     "@ssdcode/cms-partials": "^0.1.6",
-    "@ssdcode/vue-event-bus": "^0.1.4",
+    "@ssdcode/vue-event-bus": "^0.1.5",
     "@ssdcode/vue-focus-directive": "^0.1.6",
     "vue": "^2.6.10"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.11.0",
-    "@vue/cli-plugin-eslint": "^3.11.0",
-    "@vue/cli-service": "^3.11.0",
+    "@vue/cli-plugin-babel": "^3.12.0",
+    "@vue/cli-plugin-eslint": "^3.12.0",
+    "@vue/cli-service": "^3.12.0",
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.2.3",
