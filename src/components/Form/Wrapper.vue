@@ -15,11 +15,13 @@
                 :disableEvent="disableEvent"
                 :processing="processing"
                 :isDisabled="isDisabled"
+                :rule="rule"
         ></slot>
     </form>
 </template>
 <script>
     import Behaviour from './Behaviour';
+    import Rule from './Validator/Rule';
     import Error from './Validator/Error';
     import Validator from './Validator/Validator';
     import { Helper, Disabler, AjaxCaller } from "@ssdcode/cms-partials";
@@ -57,7 +59,8 @@
                 fields: {...this.collections},
                 validationBag: {},
                 error: new Error,
-                summaryBag: this.summary
+                summaryBag: this.summary,
+                rule: Rule,
             }
         },
         computed: {
