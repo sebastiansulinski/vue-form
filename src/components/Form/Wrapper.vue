@@ -190,6 +190,10 @@
                 }
             },
             callFailed(error) {
+                if ([301, 302].includes(error.response.status)) {
+                    Behaviour['redirect'](this, error.response);
+                    return;
+                }
                 if (((error.response || {}).data || {}).errors) {
                     this.setServerErrors(error.response.data.errors);
                 }
