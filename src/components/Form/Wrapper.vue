@@ -193,7 +193,7 @@
                 }
             },
             callFailed(error) {
-                if ([301, 302].includes(error.response.status)) {
+                if ((error.response || {}).status && [301, 302].includes(error.response.status)) {
                     Behaviour['redirect'](this, error.response);
                     return;
                 }
