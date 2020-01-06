@@ -1,32 +1,33 @@
 <template>
     <base-form-validation
-        :label="label"
-        :name="name"
-        :show="show"
-        :validation="validation"
-        :error="error"
-        v-slot:default="{ showLabel, showErrorFor, validation }"
+            :label="label"
+            :name="name"
+            :show="show"
+            :validation="validation"
+            :error="error"
+            v-slot:default="{ showLabel, showErrorFor, validation }"
     >
         <label :for="id" v-if="showLabel">
             <span v-if="label" v-text="label"></span>
             <span class="validation" v-show="show">
                 <span
-                    :class="cssClass"
-                    v-for="(message, rule) in validation"
-                    :key="rule"
-                    v-show="showErrorFor(rule)"
-                    v-text="message"
+                        :class="cssClass"
+                        v-for="(message, rule) in validation"
+                        :key="rule"
+                        v-show="showErrorFor(rule)"
+                        v-text="message"
                 ></span>
             </span>
         </label>
     </base-form-validation>
 </template>
 <script>
-    import Error from "./Error";
-    import BaseFormValidation from "./BaseFormValidation";
+    import Error from "./Error"
+    import BaseFormValidation from "./BaseFormValidation"
+
     export default {
         name: 'form-validation',
-        components: { BaseFormValidation },
+        components: {BaseFormValidation},
         props: {
             id: {
                 type: String,

@@ -1,7 +1,7 @@
 <template>
     <base-top-dialog
-        :session-dialog="sessionDialog"
-        v-slot:default="{
+            :session-dialog="sessionDialog"
+            v-slot:default="{
             overlay,
             visibleFor,
             message,
@@ -11,8 +11,10 @@
         }"
     >
         <div id="top-dialog" :class="{ [overlayCssClass]: overlay }">
-            <div class="dialog alert" :class="{ [visibleCssClass]: visibleFor('alert') }" v-html="message" @click="clear"></div>
-            <div class="dialog warning" :class="{ [visibleCssClass]: visibleFor('warning') }" v-html="message" @click="clear"></div>
+            <div class="dialog alert" :class="{ [visibleCssClass]: visibleFor('alert') }" v-html="message"
+                 @click="clear"></div>
+            <div class="dialog warning" :class="{ [visibleCssClass]: visibleFor('warning') }" v-html="message"
+                 @click="clear"></div>
             <div class="dialog confirm" :class="{ [visibleCssClass]: visibleFor('confirm') }">
                 <p v-html="message"></p>
                 <nav>
@@ -25,14 +27,17 @@
     </base-top-dialog>
 </template>
 <script>
-    import BaseTopDialog from "./BaseTopDialog";
+    import BaseTopDialog from "./BaseTopDialog"
+
     export default {
         name: 'top-dialog',
-        components: { BaseTopDialog },
+        components: {BaseTopDialog},
         props: {
             sessionDialog: {
                 type: Object,
-                default: () => { return {} }
+                default: () => {
+                    return {}
+                }
             },
             overlayCssClass: {
                 type: String,

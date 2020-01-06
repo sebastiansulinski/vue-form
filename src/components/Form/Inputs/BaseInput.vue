@@ -1,10 +1,11 @@
 <script>
-    import Error from "../Validator/Error";
-    import FormValidation from '../Validator/FormValidation';
-    import { Helper, Disabler } from "@ssdcode/cms-partials";
+    import Error from "../Validator/Error"
+    import FormValidation from '../Validator/FormValidation'
+    import {Helper, Disabler} from "@ssdcode/cms-partials"
+
     export default {
         mixins: [Disabler],
-        components: { FormValidation },
+        components: {FormValidation},
         props: {
             group: {
                 type: String,
@@ -86,7 +87,9 @@
             },
             inputBindings: {
                 type: Object,
-                default: () => { return {} }
+                default: () => {
+                    return {}
+                }
             }
         },
         data() {
@@ -98,79 +101,79 @@
         },
         computed: {
             isInvalid() {
-                return this.error.has(this.name);
+                return this.error.has(this.name)
             },
             showValidation() {
-                return this.isInvalid && this.displayValidation;
+                return this.isInvalid && this.displayValidation
             },
             computedValidationCssClass() {
-                return { [this.validationCssClass]: this.isInvalid }
+                return {[this.validationCssClass]: this.isInvalid}
             },
             computedWrapperCssClass() {
-                return { [this.wrapperErrorCssClass]: this.isInvalid }
+                return {[this.wrapperErrorCssClass]: this.isInvalid}
             },
             computedWrapperCssStyle() {
-                return { [this.wrapperErrorCssStyle]: this.isInvalid }
+                return {[this.wrapperErrorCssStyle]: this.isInvalid}
             },
             attributeBindings() {
-                return this.inputBindings;
+                return this.inputBindings
             }
         },
         methods: {
             emit(value, event = 'input') {
-                value = this.mutate(value);
-                this.emitFireEvent(value);
-                this.$emit(event, value);
+                value = this.mutate(value)
+                this.emitFireEvent(value)
+                this.$emit(event, value)
             },
             mutate(value) {
-                return value;
+                return value
             },
             emitFireEvent(value) {
                 if (this.fire) {
-                    window.EventBus.fire(this.fire, value);
+                    window.EventBus.fire(this.fire, value)
                 }
             },
             initialize() {
 
                 if (Helper.isEmpty(this.validation)) {
-                    return;
+                    return
                 }
 
-                let rules =  this.validation;
+                let rules = this.validation
 
                 if (!Array.isArray(this.validation)) {
-                    this.displayValidation = true;
-                    rules = Object.keys(this.validation);
+                    this.displayValidation = true
+                    rules = Object.keys(this.validation)
                 }
 
                 window.EventBus.fire('initialize-' + this.group, {
                     field: this.name,
                     rules: rules
-                });
+                })
             },
             registerListeners() {
-                window.EventBus.listen('reset-form-' + this.group, this.reset);
-                window.EventBus.listen('clear-form-' + this.group, this.clear);
+                window.EventBus.listen('reset-form-' + this.group, this.reset)
+                window.EventBus.listen('clear-form-' + this.group, this.clear)
             },
             reset() {
-                console.log('Please provide reset method implementation for ' + this.name);
+                console.log('Please provide reset method implementation for ' + this.name)
             },
             clear() {
-                console.log('Please provide clear method implementation for ' + this.name);
+                console.log('Please provide clear method implementation for ' + this.name)
             },
             optionId(option) {
                 if (option.id) {
-                    return option.id;
+                    return option.id
                 }
-                return this.name + '-' + option.value;
+                return this.name + '-' + option.value
             }
         },
         watch: {
             disabled(isDisabled) {
                 if (isDisabled) {
-                    this.disable();
+                    this.disable()
                 } else {
-                    this.enable();
+                    this.enable()
                 }
             }
         }

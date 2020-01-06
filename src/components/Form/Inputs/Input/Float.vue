@@ -1,5 +1,6 @@
 <script>
-    import Text from './Text';
+    import Text from './Text'
+
     export default {
         name: 'float-input',
         mixins: [Text],
@@ -19,20 +20,20 @@
         },
         computed: {
             attributeBindings() {
-                return {...{ step: '.01' }, ...this.inputBindings}
+                return {...{step: '.01'}, ...this.inputBindings}
             }
         },
         methods: {
             mutate(value) {
-                value = parseInt(value.replace(".", ""));
+                value = parseInt(value.replace(".", ""))
 
-                value = !value ? '' : value.toString();
+                value = !value ? '' : value.toString()
 
                 if (value.length < 3) {
-                    value = value.padStart(3, '0');
+                    value = value.padStart(3, '0')
                 }
 
-                return value.substr(0, value.length - this.decimals) + "." + value.substr(value.length - this.decimals);
+                return value.substr(0, value.length - this.decimals) + "." + value.substr(value.length - this.decimals)
             }
         }
     }

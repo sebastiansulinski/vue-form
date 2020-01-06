@@ -1,30 +1,31 @@
 <template>
     <div v-show="show" class="checkbox-group-item" :class="computedWrapperCssClass" :style="computedWrapperCssStyle">
         <input
-            type="checkbox"
-            :id="identity"
-            :name="name"
-            :disabled="isDisabled"
-            :autocomplete="autocomplete"
-            :class="inputCssClass"
-            v-model="checked"
-            @change="update"
+                type="checkbox"
+                :id="identity"
+                :name="name"
+                :disabled="isDisabled"
+                :autocomplete="autocomplete"
+                :class="inputCssClass"
+                v-model="checked"
+                @change="update"
         >
         <slot>
             <form-validation
-                :label="label"
-                :id="identity"
-                :name="name"
-                :show="showValidation"
-                :css-class="computedValidationCssClass"
-                :validation="validation"
-                :error="error"
+                    :label="label"
+                    :id="identity"
+                    :name="name"
+                    :show="showValidation"
+                    :css-class="computedValidationCssClass"
+                    :validation="validation"
+                    :error="error"
             ></form-validation>
         </slot>
     </div>
 </template>
 <script>
-    import BaseInput from './../../BaseInput';
+    import BaseInput from './../../BaseInput'
+
     export default {
         name: 'checkbox-input',
         mixins: [BaseInput],
@@ -47,48 +48,48 @@
         },
         computed: {
             valueToEmit() {
-                return this.checked ? this.trueValue : this.falseValue;
+                return this.checked ? this.trueValue : this.falseValue
             }
         },
         mounted() {
-            this.update();
-            this.initialize();
-            this.registerListeners();
-            this.registerCustomListeners();
+            this.update()
+            this.initialize()
+            this.registerListeners()
+            this.registerCustomListeners()
         },
         methods: {
             registerCustomListeners() {
                 if (this.listen) {
                     window.EventBus.listen(this.listen, checked => {
-                        this.checked = checked;
-                        this.emitFireEvent();
-                    });
+                        this.checked = checked
+                        this.emitFireEvent()
+                    })
                 }
             },
             emitFireEvent() {
                 BaseInput.methods.emitFireEvent.call(this, {
                     value: this.trueValue,
                     remove: !this.checked
-                });
-                this.$emit('input', this.valueToEmit);
+                })
+                this.$emit('input', this.valueToEmit)
             },
             isSelected() {
-                return this.currentValue === this.trueValue;
+                return this.currentValue === this.trueValue
             },
             update() {
                 if (!this.checked && this.removeWhenFalse) {
-                    window.EventBus.fire('remove-field-' + this.group, this.name);
-                    return;
+                    window.EventBus.fire('remove-field-' + this.group, this.name)
+                    return
                 }
-                this.emit(this.valueToEmit);
+                this.emit(this.valueToEmit)
             },
             reset() {
-                this.checked = this.isSelected();
-                this.update();
+                this.checked = this.isSelected()
+                this.update()
             },
             clear() {
-                this.checked = false;
-                this.update();
+                this.checked = false
+                this.update()
             }
         }
     }

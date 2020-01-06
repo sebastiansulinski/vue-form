@@ -2,32 +2,33 @@
     <div v-show="show" :class="computedWrapperCssClass" :style="computedWrapperCssStyle">
         <slot name="validation">
             <form-validation
-                :label="label"
-                :id="identity"
-                :name="name"
-                :show="showValidation"
-                :css-class="computedValidationCssClass"
-                :validation="validation"
-                :error="error"
+                    :label="label"
+                    :id="identity"
+                    :name="name"
+                    :show="showValidation"
+                    :css-class="computedValidationCssClass"
+                    :validation="validation"
+                    :error="error"
             ></form-validation>
         </slot>
         <textarea
-            :id="identity"
-            :name="name"
-            :disabled="isDisabled"
-            :maxlength="maxlength"
-            :placeholder="placeholder"
-            :autocomplete="autocomplete"
-            :class="inputCssClass"
-            :style="inputCssStyle"
-            v-focus="focus"
-            v-on="inputListeners"
-            v-model="body"
+                :id="identity"
+                :name="name"
+                :disabled="isDisabled"
+                :maxlength="maxlength"
+                :placeholder="placeholder"
+                :autocomplete="autocomplete"
+                :class="inputCssClass"
+                :style="inputCssStyle"
+                v-focus="focus"
+                v-on="inputListeners"
+                v-model="body"
         ></textarea>
     </div>
 </template>
 <script>
-    import BaseInput from './../BaseInput';
+    import BaseInput from './../BaseInput'
+
     export default {
         name: 'text-area',
         mixins: [BaseInput],
@@ -47,7 +48,7 @@
             inputListeners() {
                 return Object.assign({}, this.$listeners, {
                     input: () => {
-                        this.emit(this.body);
+                        this.emit(this.body)
                     }
                 })
             },
@@ -58,17 +59,17 @@
             }
         },
         mounted() {
-            this.currentBody = this.$slots.body ? this.$slots.body[0].text : '';
-            this.reset();
-            this.initialize();
-            this.registerListeners();
+            this.currentBody = this.$slots.body ? this.$slots.body[0].text : ''
+            this.reset()
+            this.initialize()
+            this.registerListeners()
         },
         methods: {
             reset() {
-                this.emit(this.body = this.currentBody);
+                this.emit(this.body = this.currentBody)
             },
             clear() {
-                this.emit(this.body = null);
+                this.emit(this.body = null)
             }
         }
     }

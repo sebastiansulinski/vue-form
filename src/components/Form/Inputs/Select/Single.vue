@@ -2,38 +2,39 @@
     <div v-show="show" :class="computedWrapperCssClass" :style="computedWrapperCssStyle">
         <slot>
             <form-validation
-                :label="label"
-                :id="identity"
-                :name="name"
-                :show="showValidation"
-                :css-class="computedValidationCssClass"
-                :validation="validation"
-                :error="error"
+                    :label="label"
+                    :id="identity"
+                    :name="name"
+                    :show="showValidation"
+                    :css-class="computedValidationCssClass"
+                    :validation="validation"
+                    :error="error"
             ></form-validation>
         </slot>
         <select
-            :id="identity"
-            :name="name"
-            :disabled="isDisabled"
-            :autocomplete="autocomplete"
-            :class="inputCssClass"
-            v-focus="focus"
-            v-model="selected"
-            @change="update"
+                :id="identity"
+                :name="name"
+                :disabled="isDisabled"
+                :autocomplete="autocomplete"
+                :class="inputCssClass"
+                v-focus="focus"
+                v-model="selected"
+                @change="update"
         >
             <option v-if="placeholder" v-text="placeholder" value></option>
             <option
-                v-for="option in records"
-                :key="option.value"
-                :value="option.value"
-                v-text="option.name"
+                    v-for="option in records"
+                    :key="option.value"
+                    :value="option.value"
+                    v-text="option.name"
             ></option>
         </select>
     </div>
 </template>
 <script>
-    import BaseInput from './../BaseInput';
-    import { Helper, AjaxCaller } from "@ssdcode/cms-partials";
+    import BaseInput from './../BaseInput'
+    import {Helper, AjaxCaller} from "@ssdcode/cms-partials"
+
     export default {
         name: 'single-select',
         mixins: [BaseInput, AjaxCaller],
@@ -44,7 +45,9 @@
             },
             fields: {
                 type: Object,
-                default: () => { return {} }
+                default: () => {
+                    return {}
+                }
             },
             isLast: {
                 type: Boolean,
@@ -59,7 +62,7 @@
         },
         computed: {
             endPoint() {
-                return this.options;
+                return this.options
             },
             requestData() {
                 return {
@@ -71,66 +74,66 @@
             }
         },
         mounted() {
-            this.fetch();
-            this.emit(this.selected);
-            this.initialize();
-            this.registerListeners();
+            this.fetch()
+            this.emit(this.selected)
+            this.initialize()
+            this.registerListeners()
         },
         methods: {
             fetch() {
                 if (Helper.isObject(this.options)) {
-                    this.records = this.options[this.dependsOn];
-                    return;
+                    this.records = this.options[this.dependsOn]
+                    return
                 }
                 if (typeof this.options === 'string') {
-                    this.fetchAjax();
-                    return;
+                    this.fetchAjax()
+                    return
                 }
-                this.records = this.options;
+                this.records = this.options
             },
             fetchAjax() {
                 if (this.isDisabled) {
-                    return;
+                    return
                 }
-                this.makeAjaxCall(this.callSuccessful, this.callFailed);
+                this.makeAjaxCall(this.callSuccessful, this.callFailed)
             },
             callSuccessful(response) {
-                this.stopProcessingAjaxCall();
-                this.records = response.data.records;
+                this.stopProcessingAjaxCall()
+                this.records = response.data.records
                 if (response.data.summary) {
-                    window.EventBus.fire('update-summary-' + this.group, response.data.summary);
+                    window.EventBus.fire('update-summary-' + this.group, response.data.summary)
                 }
             },
             callFailed(error) {
-                window.ErrorHandler.showError(error, this.stopProcessingAjaxCall);
+                window.ErrorHandler.showError(error, this.stopProcessingAjaxCall)
             },
             reset() {
                 if (this.currentValue) {
-                    this.emit(this.selected = this.currentValue);
-                    return;
+                    this.emit(this.selected = this.currentValue)
+                    return
                 }
-                this.clear();
+                this.clear()
             },
             clear() {
-                this.emit(this.selected = '');
+                this.emit(this.selected = '')
             },
             update() {
-                this.emit(this.selected);
+                this.emit(this.selected)
                 if (this.isLast) {
-                    this.fetch();
+                    this.fetch()
                 }
             }
         },
         watch: {
             dependsOn(value) {
-                this.selected = '';
+                this.selected = ''
                 if (!value) {
-                    this.disable();
+                    this.disable()
                 } else {
-                    this.enable();
-                    this.fetch();
+                    this.enable()
+                    this.fetch()
                 }
-                this.emit(this.selected);
+                this.emit(this.selected)
             }
         }
     }

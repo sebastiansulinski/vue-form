@@ -1,32 +1,33 @@
 <template>
     <div v-show="show" class="checkbox-group-item" :class="computedWrapperCssClass" :style="computedWrapperCssStyle">
         <input
-            type="checkbox"
-            :id="identity"
-            :name="name"
-            :disabled="isDisabled"
-            :autocomplete="autocomplete"
-            :indeterminate.prop="indeterminate"
-            :class="inputCssClass"
-            v-model="checked"
-            @change="update"
+                type="checkbox"
+                :id="identity"
+                :name="name"
+                :disabled="isDisabled"
+                :autocomplete="autocomplete"
+                :indeterminate.prop="indeterminate"
+                :class="inputCssClass"
+                v-model="checked"
+                @change="update"
         >
         <slot>
             <form-validation
-                :label="label"
-                :id="identity"
-                :name="name"
-                :show="showValidation"
-                :css-class="computedValidationCssClass"
-                :validation="validation"
-                :error="error"
+                    :label="label"
+                    :id="identity"
+                    :name="name"
+                    :show="showValidation"
+                    :css-class="computedValidationCssClass"
+                    :validation="validation"
+                    :error="error"
             ></form-validation>
         </slot>
     </div>
 </template>
 <script>
-    import BaseInput from './../../BaseInput';
-    import MultiHandler from './../../../../../mixins/MultiHandler';
+    import BaseInput from './../../BaseInput'
+    import MultiHandler from './../../../../../mixins/MultiHandler'
+
     export default {
         name: 'master-checkbox-input',
         mixins: [BaseInput, MultiHandler],
@@ -48,12 +49,12 @@
         },
         methods: {
             evaluate() {
-                const length = this.items.length;
-                this.checked = length === this.total;
-                this.indeterminate = length > 0 && length < this.total;
+                const length = this.items.length
+                this.checked = length === this.total
+                this.indeterminate = length > 0 && length < this.total
             },
             update() {
-                window.EventBus.fire(this.fire, this.checked);
+                window.EventBus.fire(this.fire, this.checked)
             }
         }
     }

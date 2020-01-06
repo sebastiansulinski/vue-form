@@ -1,5 +1,6 @@
 <script>
-    import Trigger from './Trigger';
+    import Trigger from './Trigger'
+
     export default {
         name: 'form-trigger',
         mixins: [Trigger],
@@ -10,12 +11,12 @@
             },
         },
         created() {
-            window.EventBus.listen('submission-started-' + this.group, this.startProcessing);
-            window.EventBus.listen('submission-ended-' + this.group, this.stopProcessing);
+            window.EventBus.listen('submission-started-' + this.group, this.startProcessing)
+            window.EventBus.listen('submission-ended-' + this.group, this.stopProcessing)
         },
         methods: {
             trigger() {
-                window.EventBus.fire(this.fire + '-' + this.group);
+                window.EventBus.fire(this.fire + '-' + this.group)
             }
         }
     }

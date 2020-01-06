@@ -1,5 +1,6 @@
 <script>
-    import Text from './Text';
+    import Text from './Text'
+
     export default {
         name: 'email-input',
         mixins: [Text],

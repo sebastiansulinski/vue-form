@@ -1,28 +1,28 @@
-import Rule from './Rule';
+import Rule from './Rule'
 
 export default class Validator {
 
     constructor(wrapper, resolve, reject) {
 
-        this.fields = wrapper.requestData;
-        this.validationBag = wrapper.validationBag;
-        this.errors = {};
+        this.fields = wrapper.requestData
+        this.validationBag = wrapper.validationBag
+        this.errors = {}
 
         Promise.all(this.promises()).then(resolve).catch(error => {
-            wrapper.error.set(this.errors);
-            reject({ message: error });
-        });
+            wrapper.error.set(this.errors)
+            reject({message: error})
+        })
     }
 
     promises() {
 
-        let promises = [];
+        let promises = []
 
         for (let field in this.validationBag) {
-            promises.push(this.validate(field));
+            promises.push(this.validate(field))
         }
 
-        return promises;
+        return promises
     }
 
     validate(field) {
@@ -32,19 +32,19 @@ export default class Validator {
             const
                 rules = this.validationBag[field],
                 rulesCount = rules.length,
-                value = this.getValue(field);
+                value = this.getValue(field)
 
             for (let index in rules) {
 
                 if (!this.errors.hasOwnProperty(field)) {
 
-                    let [rule, params] = rules[index].split(':');
+                    let [rule, params] = rules[index].split(':')
 
                     try {
 
                         if (!Rule[rule](value, params)) {
-                            this.errors[field] = rule;
-                            reject("Your input was invalid.");
+                            this.errors[field] = rule
+                            reject("Your input was invalid.")
                         }
 
                     } catch (error) {
@@ -53,16 +53,16 @@ export default class Validator {
                 }
 
                 if ((parseInt(index) + 1) === rulesCount) {
-                    resolve();
+                    resolve()
                 }
             }
-        });
+        })
     }
 
     getValue(field) {
 
         return field.split('.').reduce((accumulator, currentValue) => {
-            return accumulator[currentValue];
-        }, this.fields);
+            return accumulator[currentValue]
+        }, this.fields)
     }
 }

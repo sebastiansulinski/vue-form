@@ -1,5 +1,6 @@
 <script>
-    import { Disabler, Processor } from "@ssdcode/cms-partials";
+    import {Disabler, Processor} from "@ssdcode/cms-partials"
+
     export default {
         mixins: [Disabler, Processor],
         props: {
@@ -17,18 +18,18 @@
             }
         },
         created() {
-            window.EventBus.listen('disable-started-' + this.group, this.disable);
-            window.EventBus.listen('disable-ended-' + this.group, this.enable);
+            window.EventBus.listen('disable-started-' + this.group, this.disable)
+            window.EventBus.listen('disable-ended-' + this.group, this.enable)
         },
         methods: {
             conditionalTrigger() {
                 if (this.isDisabled && !this.alwaysEnabled) {
-                    return;
+                    return
                 }
-                this.trigger();
+                this.trigger()
             },
             trigger() {
-                console.log('Please implement trigger method');
+                console.log('Please implement trigger method')
             }
         },
         render() {
@@ -36,7 +37,7 @@
                 isDisabled: this.isDisabled,
                 processing: this.processing,
                 trigger: this.conditionalTrigger
-            });
+            })
         }
     }
 </script>

@@ -1,29 +1,29 @@
 export default class Error {
 
     constructor() {
-        this.clear();
+        this.clear()
     }
 
     set(errors) {
-        this.errors = errors;
+        this.errors = errors
     }
 
     all() {
-        return this.errors;
+        return this.errors
     }
 
     clear() {
-        this.errors = {};
+        this.errors = {}
     }
 
     has(field, rule = null) {
 
-        const hasProperty = this.errors.hasOwnProperty(field);
+        const hasProperty = this.errors.hasOwnProperty(field)
 
         if (rule === null) {
-            return hasProperty;
+            return hasProperty
         }
 
-        return hasProperty && this.errors[field] === rule;
+        return hasProperty && this.errors[field] === rule
     }
 }

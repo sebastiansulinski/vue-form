@@ -2,21 +2,22 @@
     <div v-show="show" :class="computedWrapperCssClass" :style="computedWrapperCssStyle">
         <slot name="validation">
             <form-validation
-                :label="label"
-                :id="identity"
-                :name="name"
-                :show="showValidation"
-                :css-class="computedValidationCssClass"
-                :validation="validation"
-                :error="error"
+                    :label="label"
+                    :id="identity"
+                    :name="name"
+                    :show="showValidation"
+                    :css-class="computedValidationCssClass"
+                    :validation="validation"
+                    :error="error"
             ></form-validation>
         </slot>
         <textarea :ref="identity" :disabled="isDisabled"></textarea>
     </div>
 </template>
 <script>
-    import Toolbar from './Toolbar';
-    import BaseInput from './../BaseInput';
+    import Toolbar from './Toolbar'
+    import BaseInput from './../BaseInput'
+
     export default {
         name: 'wysiwyg-editor',
         mixins: [BaseInput],
@@ -27,7 +28,9 @@
             },
             config: {
                 type: Object,
-                default: () => { return {} }
+                default: () => {
+                    return {}
+                }
             }
         },
         data() {
@@ -53,43 +56,43 @@
         },
         mounted() {
             if (typeof window.CKEDITOR === 'undefined') {
-                return;
+                return
             }
-            this.currentBody = this.$slots.body ? this.$slots.body[0].text : '';
-            this.makeEditor();
-            this.initialize();
-            this.registerListeners();
+            this.currentBody = this.$slots.body ? this.$slots.body[0].text : ''
+            this.makeEditor()
+            this.initialize()
+            this.registerListeners()
         },
         methods: {
             makeEditor() {
                 this.editor = window.CKEDITOR.replace(
                     this.$refs[this.identity],
                     Object.assign({}, this.default, this.config)
-                );
-                this.reset();
-                this.editor.on('change', this.update);
+                )
+                this.reset()
+                this.editor.on('change', this.update)
             },
             setData(value) {
-                this.editor.setData(value);
+                this.editor.setData(value)
             },
             update() {
-                this.emit(this.editor.getData());
+                this.emit(this.editor.getData())
             },
             toolbar() {
-                return Toolbar[this.config.toolbar || 'full'];
+                return Toolbar[this.config.toolbar || 'full']
             },
             reset() {
-                this.setData(this.currentBody);
-                this.emit(this.currentBody);
+                this.setData(this.currentBody)
+                this.emit(this.currentBody)
             },
             clear() {
-                this.setData('');
-                this.emit('');
+                this.setData('')
+                this.emit('')
             }
         },
         watch: {
             isDisabled(isReadOnly) {
-                this.editor.setReadOnly(isReadOnly);
+                this.editor.setReadOnly(isReadOnly)
             }
         }
     }
