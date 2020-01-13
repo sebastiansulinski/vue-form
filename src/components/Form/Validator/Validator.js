@@ -1,68 +1,59 @@
 import Rule from './Rule'
 
 export default class Validator {
+  constructor(wrapper, resolve, reject) {
+    this.fields = wrapper.requestData
+    this.validationBag = wrapper.validationBag
+    this.errors = {}
 
-    constructor(wrapper, resolve, reject) {
+    Promise.all(this.promises())
+      .then(resolve)
+      .catch(error => {
+        wrapper.error.set(this.errors)
+        reject({ message: error })
+      })
+  }
 
-        this.fields = wrapper.requestData
-        this.validationBag = wrapper.validationBag
-        this.errors = {}
+  promises() {
+    let promises = []
 
-        Promise.all(this.promises()).then(resolve).catch(error => {
-            wrapper.error.set(this.errors)
-            reject({message: error})
-        })
+    for (let field in this.validationBag) {
+      promises.push(this.validate(field))
     }
 
-    promises() {
+    return promises
+  }
 
-        let promises = []
+  validate(field) {
+    return new Promise((resolve, reject) => {
+      const rules = this.validationBag[field],
+        rulesCount = rules.length,
+        value = this.getValue(field)
 
-        for (let field in this.validationBag) {
-            promises.push(this.validate(field))
+      for (let index in rules) {
+        if (!this.errors.hasOwnProperty(field)) {
+          let [rule, params] = rules[index].split(':')
+
+          try {
+            if (!Rule[rule](value, params)) {
+              this.errors[field] = rule
+              reject('Your input was invalid.')
+            }
+          } catch (error) {
+            // reject("Invalid form validation rule '" + rule + "'.");
+          }
         }
 
-        return promises
-    }
+        if (parseInt(index) + 1 === rulesCount) {
+          resolve()
+        }
+      }
+    })
+  }
 
-    validate(field) {
-
-        return new Promise((resolve, reject) => {
-
-            const
-                rules = this.validationBag[field],
-                rulesCount = rules.length,
-                value = this.getValue(field)
-
-            for (let index in rules) {
-
-                if (!this.errors.hasOwnProperty(field)) {
-
-                    let [rule, params] = rules[index].split(':')
-
-                    try {
-
-                        if (!Rule[rule](value, params)) {
-                            this.errors[field] = rule
-                            reject("Your input was invalid.")
-                        }
-
-                    } catch (error) {
-                        // reject("Invalid form validation rule '" + rule + "'.");
-                    }
-                }
-
-                if ((parseInt(index) + 1) === rulesCount) {
-                    resolve()
-                }
-            }
-        })
-    }
-
-    getValue(field) {
-
-        return field.split('.').reduce((accumulator, currentValue) => {
-            return accumulator[currentValue]
-        }, this.fields)
-    }
+  getValue(field) {
+    return field.split('.').reduce((accumulator, currentValue) => {
+      return accumulator[currentValue]
+    }, this.fields)
+  }
 }

@@ -1,13 +1,13 @@
 <script>
-    import Text from './Text'
+import Text from './Text'
 
-    export default {
-        name: 'password-input',
-        mixins: [Text],
-        data() {
-            return {
-                type: 'password'
-            }
-        }
+export default {
+  name: 'password-input',
+  mixins: [Text],
+  data() {
+    return {
+      type: 'password'
     }
+  }
+}
 </script>

@@ -1,43 +1,43 @@
 <script>
-    import {Disabler, Processor} from "@ssdcode/cms-partials"
+import { Disabler, Processor } from '@ssdcode/cms-partials'
 
-    export default {
-        mixins: [Disabler, Processor],
-        props: {
-            group: {
-                type: String,
-                required: true,
-            },
-            name: {
-                type: String,
-                default: 'items',
-            },
-            alwaysEnabled: {
-                type: Boolean,
-                default: false
-            }
-        },
-        created() {
-            window.EventBus.listen('disable-started-' + this.group, this.disable)
-            window.EventBus.listen('disable-ended-' + this.group, this.enable)
-        },
-        methods: {
-            conditionalTrigger() {
-                if (this.isDisabled && !this.alwaysEnabled) {
-                    return
-                }
-                this.trigger()
-            },
-            trigger() {
-                console.log('Please implement trigger method')
-            }
-        },
-        render() {
-            return this.$scopedSlots.default({
-                isDisabled: this.isDisabled,
-                processing: this.processing,
-                trigger: this.conditionalTrigger
-            })
-        }
+export default {
+  mixins: [Disabler, Processor],
+  props: {
+    group: {
+      type: String,
+      required: true
+    },
+    name: {
+      type: String,
+      default: 'items'
+    },
+    alwaysEnabled: {
+      type: Boolean,
+      default: false
     }
+  },
+  created() {
+    window.EventBus.listen('disable-started-' + this.group, this.disable)
+    window.EventBus.listen('disable-ended-' + this.group, this.enable)
+  },
+  methods: {
+    conditionalTrigger() {
+      if (this.isDisabled && !this.alwaysEnabled) {
+        return
+      }
+      this.trigger()
+    },
+    trigger() {
+      console.log('Please implement trigger method')
+    }
+  },
+  render() {
+    return this.$scopedSlots.default({
+      isDisabled: this.isDisabled,
+      processing: this.processing,
+      trigger: this.conditionalTrigger
+    })
+  }
+}
 </script>
