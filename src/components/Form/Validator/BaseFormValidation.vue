@@ -30,9 +30,6 @@ export default {
       return this.label || this.show
     }
   },
-  created() {
-    console.log(this.validation)
-  },
   methods: {
     showErrorFor(rule) {
       return this.error.has(this.name, this.ruleOnly(rule))
