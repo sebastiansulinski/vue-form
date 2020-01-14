@@ -1,11 +1,13 @@
 export default class Behaviour {
   static confirmWithDialogAndReset(form, response) {
+    form.enable()
     form.reset()
 
     Behaviour.confirm(form, response)
   }
 
   static confirmWithDialogAndClear(form, response) {
+    form.enable()
     form.clear()
 
     Behaviour.confirm(form, response)

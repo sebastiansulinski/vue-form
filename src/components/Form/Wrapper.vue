@@ -98,6 +98,7 @@ export default {
       ])
     },
     stopProcessingAjaxCallEvent() {
+      this.enable()
       window.EventBus.fire([
         'submission-ended-' + this.group,
         'disable-ended-' + this.group
