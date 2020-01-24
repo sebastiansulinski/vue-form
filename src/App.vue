@@ -502,9 +502,7 @@
         :error="error"
         :disabled="isDisabled"
       >
-        <template v-slot:body
-          >Content goes here</template
-        >
+        <template v-slot:body>Content goes here</template>
       </text-area>
 
       <wysiwyg-editor
@@ -520,9 +518,7 @@
         :config="{ height: '30rem' }"
         :disabled="isDisabled"
       >
-        <template v-slot:body
-          >&lt;h1&gt;Body&lt;/h1&gt;</template
-        >
+        <template v-slot:body>&lt;h1&gt;Body&lt;/h1&gt;</template>
       </wysiwyg-editor>
 
       <div class="divider"></div>

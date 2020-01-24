@@ -26,11 +26,9 @@ which you will have to import and register
 ```javascript
 import Vue from 'vue'
 import EventBus from '@ssdcode/vue-event-bus';
-import { ErrorHandler } from '@ssdcode/cms-partials';
 import { FocusDirective } from '@ssdcode/vue-focus-directive';
 
 window.EventBus = window.EventBus || new EventBus;
-window.ErrorHandler = window.ErrorHandler || ErrorHandler;
 
 import VueForm from '@ssdcode/vue-form';
 

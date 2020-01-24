@@ -24,7 +24,12 @@ import Behaviour from './Behaviour'
 import Rule from './Validator/Rule'
 import Error from './Validator/Error'
 import Validator from './Validator/Validator'
-import { Helper, Disabler, AjaxCaller } from '@ssdcode/cms-partials'
+import {
+  Helper,
+  Disabler,
+  AjaxCaller,
+  ErrorHandler
+} from '@ssdcode/cms-partials'
 
 export default {
   name: 'form-wrapper',
@@ -195,7 +200,7 @@ export default {
           response
         )
       } catch (error) {
-        window.ErrorHandler.showError({
+        ErrorHandler.showError({
           message: 'Invalid form behaviour'
         })
         this.stopProcessingAjaxCall()
@@ -212,7 +217,7 @@ export default {
       if (((error.response || {}).data || {}).errors) {
         this.setServerErrors(error.response.data.errors)
       }
-      window.ErrorHandler.showError(error, this.stopProcessingAjaxCall)
+      ErrorHandler.showError(error, this.stopProcessingAjaxCall)
     },
     setServerErrors(errors) {
       Object.keys(errors).forEach(key => {

@@ -1,7 +1,7 @@
 <script>
 import Trigger from './Trigger'
 import Behaviour from './Behaviour'
-import { AjaxCaller } from '@ssdcode/cms-partials'
+import { AjaxCaller, ErrorHandler } from '@ssdcode/cms-partials'
 import MultiHandler from './../../mixins/MultiHandler'
 
 export default {
@@ -46,14 +46,14 @@ export default {
           response
         )
       } catch (error) {
-        window.ErrorHandler.showError({
+        ErrorHandler.showError({
           message: "Invalid form behaviour '" + response.data.behaviour + "'."
         })
         this.stopProcessingAjaxCall()
       }
     },
     callFailed(error) {
-      window.ErrorHandler.showError(error, this.stopProcessingAjaxCall)
+      ErrorHandler.showError(error, this.stopProcessingAjaxCall)
     }
   }
 }

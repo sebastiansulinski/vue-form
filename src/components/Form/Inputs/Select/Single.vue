@@ -37,7 +37,7 @@
 </template>
 <script>
 import BaseInput from './../BaseInput'
-import { Helper, AjaxCaller } from '@ssdcode/cms-partials'
+import { Helper, AjaxCaller, ErrorHandler } from '@ssdcode/cms-partials'
 
 export default {
   name: 'single-select',
@@ -112,7 +112,7 @@ export default {
       }
     },
     callFailed(error) {
-      window.ErrorHandler.showError(error, this.stopProcessingAjaxCall)
+      ErrorHandler.showError(error, this.stopProcessingAjaxCall)
     },
     reset() {
       if (this.currentValue) {

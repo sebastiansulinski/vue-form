@@ -23,54 +23,54 @@ import MultiSelect from './components/Form/Inputs/Select/Multi'
 import TextArea from './components/Form/Inputs/TextArea/TextArea'
 import WysiwygEditor from './components/Form/Inputs/TextArea/Wysiwyg'
 
-import Error from "./components/Form/Validator/Error"
+import Error from './components/Form/Validator/Error'
 
 const Components = {
-    BaseTopDialog,
-    TopDialog,
-    FormWrapper,
-    BaseFormValidation,
-    FormValidation,
-    FormTrigger,
-    MultiCheckboxTrigger,
-    DateInput,
-    DateTimeInput,
-    EmailInput,
-    FloatInput,
-    HiddenInput,
-    NumberInput,
-    PasswordInput,
-    TextInput,
-    TimeInput,
-    CheckboxInput,
-    CheckboxGroupInput,
-    MasterCheckboxInput,
-    RadioInput,
-    SingleSelect,
-    MultiSelect,
-    TextArea,
-    WysiwygEditor,
-    Error,
+  BaseTopDialog,
+  TopDialog,
+  FormWrapper,
+  BaseFormValidation,
+  FormValidation,
+  FormTrigger,
+  MultiCheckboxTrigger,
+  DateInput,
+  DateTimeInput,
+  EmailInput,
+  FloatInput,
+  HiddenInput,
+  NumberInput,
+  PasswordInput,
+  TextInput,
+  TimeInput,
+  CheckboxInput,
+  CheckboxGroupInput,
+  MasterCheckboxInput,
+  RadioInput,
+  SingleSelect,
+  MultiSelect,
+  TextArea,
+  WysiwygEditor,
+  Error
 }
 
 // Declare install function executed by Vue.use()
 export function install(Vue) {
-    if (install.installed) return
-    install.installed = true
-    Object.keys(Components).forEach(name => {
-        Vue.component(name, Components[name])
-    })
+  if (install.installed) return
+  install.installed = true
+  Object.keys(Components).forEach(name => {
+    Vue.component(name, Components[name])
+  })
 }
 
 // Auto-install when vue is found (eg. in browser via <script> tag)
 let GlobalVue = null
 if (typeof window !== 'undefined') {
-    GlobalVue = window.Vue
+  GlobalVue = window.Vue
 } else if (typeof global !== 'undefined') {
-    GlobalVue = global.Vue
+  GlobalVue = global.Vue
 }
 if (GlobalVue) {
-    GlobalVue.use({install})
+  GlobalVue.use({ install })
 }
 
 // To allow use as module (npm/webpack/etc.) export component
