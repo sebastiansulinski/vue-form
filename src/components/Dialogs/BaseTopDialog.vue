@@ -1,5 +1,5 @@
 <script>
-import { AjaxCaller, EscapeHandler } from '@ssdcode/cms-partials'
+import { AjaxCaller, EscapeHandler, ErrorReporter } from '@ssdcode/cms-partials'
 
 export default {
   name: 'base-top-dialog',
@@ -32,15 +32,15 @@ export default {
     }
   },
   created() {
-    window.EventBus.listen('clear-top-dialog', this.clear)
-    window.EventBus.listen('top-alert', this.alertEvent)
-    window.EventBus.listen('top-warning', this.warningEvent)
-    window.EventBus.listen('top-confirm', this.confirmEvent)
+    EventBus.listen('clear-top-dialog', this.clear)
+    EventBus.listen('top-alert', this.alertEvent)
+    EventBus.listen('top-warning', this.warningEvent)
+    EventBus.listen('top-confirm', this.confirmEvent)
   },
   mounted() {
     if (Object.keys(this.sessionDialog).length) {
       setTimeout(() => {
-        window.EventBus.fire(this.sessionDialog.type, {
+        EventBus.fire(this.sessionDialog.type, {
           id: 'session-' + this.sessionDialog.type,
           message: this.sessionDialog.message
         })
@@ -65,7 +65,7 @@ export default {
       this.data = {}
       this.methodType = 'get'
       this.stopProcessingAjaxCall()
-      window.EventBus.fire(this.id + '-cleared', data || {})
+      EventBus.fire(this.id + '-cleared', data || {})
     },
     clearCountDown() {
       if (this.timeout === null) {
@@ -122,27 +122,20 @@ export default {
       }
     },
     success(response) {
-      window.EventBus.fire(this.id + '-called', {
+      EventBus.fire(this.id + '-called', {
         response: response,
         dialog: this
       })
     },
     failure(error) {
-      this.stopProcessingAjaxCall()
-      if (error.response) {
-        error =
-          'Error code: ' +
-          error.response.status +
-          ' (' +
-          error.response.statusText +
-          ')'
-      } else {
-        error = error.message
+      if (
+        (error.response || {}).status &&
+        [301, 302].includes(error.response.status)
+      ) {
+        new Behaviour(this, 'redirect', error.response)
+        return
       }
-      this.warningEvent({
-        id: this.id,
-        message: error
-      })
+      ErrorReporter.report(error, null, null, this.stopProcessingAjaxCall)
     }
   },
   render() {

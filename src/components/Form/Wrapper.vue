@@ -28,7 +28,7 @@ import {
   Helper,
   Disabler,
   AjaxCaller,
-  ErrorHandler
+  ErrorReporter
 } from '@ssdcode/cms-partials'
 
 export default {
@@ -200,10 +200,12 @@ export default {
           response
         )
       } catch (error) {
-        ErrorHandler.showError({
-          message: 'Invalid form behaviour'
-        })
-        this.stopProcessingAjaxCall()
+        ErrorReporter.report(
+          'Invalid form behaviour: ' + this.behaviour,
+          this.group,
+          null,
+          this.stopProcessingAjaxCall
+        )
       }
     },
     callFailed(error) {
@@ -217,7 +219,7 @@ export default {
       if (((error.response || {}).data || {}).errors) {
         this.setServerErrors(error.response.data.errors)
       }
-      ErrorHandler.showError(error, this.stopProcessingAjaxCall)
+      ErrorReporter.report(error, this.group, null, this.stopProcessingAjaxCall)
     },
     setServerErrors(errors) {
       Object.keys(errors).forEach(key => {

@@ -14,7 +14,7 @@ export default class Behaviour {
   }
 
   static reload() {
-    window.location.reload(true)
+    window.location.reload()
   }
 
   static goTo(trigger, data) {

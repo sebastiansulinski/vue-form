@@ -594,16 +594,20 @@ import VueForm from './wrapper.js'
 
 export default {
   name: 'app',
-  components: {
-    ...VueForm
+  components: VueForm,
+  created() {
+    EventBus.listen('confirmation-called', () => {
+      window.location.reload()
+    })
   },
   methods: {
     confirm() {
-      window.EventBus.fire('top-confirm', {
+      EventBus.fire('top-confirm', {
         id: 'confirmation',
         message: 'Are you sure you wish to remove it?',
-        url: '/',
-        method: 'get'
+        url: 'http://localhost:3000/posts',
+        method: 'get',
+        behaviour: 'reload'
       })
     }
   }
