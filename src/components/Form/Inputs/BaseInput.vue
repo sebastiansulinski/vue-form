@@ -122,6 +122,9 @@ export default {
       return this.inputBindings
     }
   },
+  beforeDestroy() {
+    this.deinitialize()
+  },
   methods: {
     emit(value, event = 'input') {
       value = this.mutate(value)
@@ -152,6 +155,9 @@ export default {
         field: this.name,
         rules: rules
       })
+    },
+    deinitialize() {
+      window.EventBus.fire('deinitialize-' + this.group, this.name)
     },
     registerListeners() {
       window.EventBus.listen('reset-form-' + this.group, this.reset)

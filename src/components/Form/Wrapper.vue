@@ -83,6 +83,7 @@ export default {
   created() {
     window.EventBus.listen('submit-' + this.group, this.submitEvent)
     window.EventBus.listen('initialize-' + this.group, this.initialize)
+    window.EventBus.listen('deinitialize-' + this.group, this.deinitialize)
     window.EventBus.listen('reset-' + this.group, this.reset)
     window.EventBus.listen('clear-' + this.group, this.clear)
     window.EventBus.listen('disable-started-' + this.group, this.disable)
@@ -113,6 +114,12 @@ export default {
       if (!this.validationBag.hasOwnProperty(data.field)) {
         this.validationBag[data.field] = data.rules
       }
+    },
+    deinitialize(field) {
+      if (this.validationBag.hasOwnProperty(field)) {
+        delete this.validationBag[field]
+      }
+      this.removeField(field)
     },
     disable() {
       this.clearNotifications()

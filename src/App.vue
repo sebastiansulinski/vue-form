@@ -243,6 +243,36 @@
           </div>
 
           <div class="cell small-12 medium-6">
+            <single-select
+              :group="group"
+              name="has_address"
+              label="Has address?: *"
+              v-model="fields.has_address"
+              :options="[
+                {
+                  name: 'No',
+                  value: 0
+                },
+                {
+                  name: 'Yes',
+                  value: 1
+                }
+              ]"
+              current-value="0"
+              :validation="{
+                required: 'Please select one option',
+                'in:0,1': 'Invalid selection'
+              }"
+              :error="error"
+              :disabled="isDisabled"
+            ></single-select>
+          </div>
+
+          <div class="cell small-12 medium-6">&nbsp;</div>
+        </div>
+
+        <div v-if="fields.has_address === 1" class="grid-x grid-margin-x">
+          <div class="cell small-12 medium-6">
             <text-input
               :group="group"
               name="address.line_1"
