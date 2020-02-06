@@ -11,8 +11,12 @@ export default class Error {
     return this.errors
   }
 
-  clear() {
-    this.errors = {}
+  clear(field = null) {
+    if (field) {
+      delete this.errors[field]
+    } else {
+      this.errors = {}
+    }
   }
 
   has(field, rule = null) {

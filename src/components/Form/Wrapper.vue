@@ -120,6 +120,7 @@ export default {
         delete this.validationBag[field]
       }
       this.removeField(field)
+      this.error.clear(field)
     },
     disable() {
       this.clearNotifications()
