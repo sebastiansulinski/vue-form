@@ -25,28 +25,9 @@
   </div>
 </template>
 <script>
-import MultiSelectInput from './../../MultiSelectInput'
+import BaseCheckboxGroupInput from './BaseCheckboxGroupInput';
 
 export default {
-  name: 'checkbox-group-input',
-  mixins: [MultiSelectInput],
-  mounted() {
-    if (this.selected) {
-      this.emit(this.selected)
-    }
-    this.initialize()
-    this.registerListeners()
-  },
-  methods: {
-    update(event) {
-      const value = event.target.value
-      if (this.isSelected(value)) {
-        this.selected = this.selected.filter(element => element !== value)
-      } else {
-        this.selected.push(value)
-      }
-      this.emit(this.selected)
-    }
-  }
-}
+  mixins: [BaseCheckboxGroupInput]
+};
 </script>

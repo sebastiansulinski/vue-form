@@ -1,16 +1,16 @@
-import Vue from 'vue'
-import EventBus from '@ssdcode/vue-event-bus'
-import { FocusDirective } from '@ssdcode/vue-focus-directive'
+import Vue from 'vue';
+import EventBus from '@ssdcode/vue-event-bus';
+import { FocusDirective } from '@ssdcode/vue-focus-directive';
 
-window.EventBus = window.EventBus || new EventBus()
+window.EventBus = window.EventBus || new EventBus();
 
-import App from './App.vue'
+import App from './App.vue';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 new Vue({
   directives: {
     FocusDirective
   },
   render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');

@@ -1,8 +1,7 @@
 <script>
-import Error from './Error'
+import Error from './Error';
 
 export default {
-  name: 'base-form-validation',
   props: {
     label: {
       type: String,
@@ -27,15 +26,15 @@ export default {
   },
   computed: {
     showLabel() {
-      return this.label || this.show
+      return this.label || this.show;
     }
   },
   methods: {
     showErrorFor(rule) {
-      return this.error.has(this.name, this.ruleOnly(rule))
+      return this.error.has(this.name, this.ruleOnly(rule));
     },
     ruleOnly(rule) {
-      return rule.split(':')[0]
+      return rule.split(':')[0];
     }
   },
   render() {
@@ -44,7 +43,7 @@ export default {
       showErrorFor: this.showErrorFor,
       ruleOnly: this.ruleOnly,
       validation: this.validation
-    })
+    });
   }
-}
+};
 </script>

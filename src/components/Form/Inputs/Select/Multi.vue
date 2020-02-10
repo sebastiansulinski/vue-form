@@ -37,20 +37,9 @@
   </div>
 </template>
 <script>
-import MultiSelectInput from './../MultiSelectInput'
+import BaseMultiSelect from './BaseMultiSelect';
 
 export default {
-  name: 'multi-select',
-  mixins: [MultiSelectInput],
-  mounted() {
-    this.update()
-    this.initialize()
-    this.registerListeners()
-  },
-  methods: {
-    update() {
-      this.emit(this.selected)
-    }
-  }
-}
+  mixins: [BaseMultiSelect]
+};
 </script>

@@ -22,11 +22,10 @@
   </base-form-validation>
 </template>
 <script>
-import Error from './Error'
-import BaseFormValidation from './BaseFormValidation'
+import Error from './Error';
+import BaseFormValidation from './BaseFormValidation';
 
 export default {
-  name: 'form-validation',
   components: { BaseFormValidation },
   props: {
     id: {
@@ -52,7 +51,7 @@ export default {
     validation: {
       type: Object,
       default: () => {
-        return {}
+        return {};
       }
     },
     error: {
@@ -60,5 +59,5 @@ export default {
       default: () => new Error()
     }
   }
-}
+};
 </script>

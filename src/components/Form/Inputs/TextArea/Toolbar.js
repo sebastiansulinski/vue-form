@@ -41,4 +41,4 @@ export default {
       items: ['Subscript', 'Styles', 'Format', 'CmdTokens']
     }
   ]
-}
+};

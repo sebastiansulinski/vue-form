@@ -620,15 +620,15 @@
 </template>
 
 <script>
-import VueForm from './wrapper.js'
+import VueForm from './wrapper.js';
 
 export default {
   name: 'app',
   components: VueForm,
   created() {
     EventBus.listen('confirmation-called', () => {
-      window.location.reload()
-    })
+      window.location.reload();
+    });
   },
   methods: {
     confirm() {
@@ -638,8 +638,8 @@ export default {
         url: 'http://localhost:3000/posts',
         method: 'get',
         behaviour: 'reload'
-      })
+      });
     }
   }
-}
+};
 </script>

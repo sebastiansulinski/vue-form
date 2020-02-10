@@ -1,58 +1,58 @@
-import { Helper } from '@ssdcode/cms-partials'
+import { Helper } from '@ssdcode/cms-partials';
 
 export default class Rule {
   static required(value) {
-    return !Helper.isEmpty(value)
+    return !Helper.isEmpty(value);
   }
 
   static validateIfNotEmpty(value, callback) {
     if (Helper.isEmpty(value)) {
-      return true
+      return true;
     }
 
-    return callback()
+    return callback();
   }
 
   static min(value, params) {
     if (typeof value === 'string') {
       return Rule.validateIfNotEmpty(value, () => {
-        return value.length >= params
-      })
+        return value.length >= params;
+      });
     }
 
-    return Object.keys(value).length >= params
+    return Object.keys(value).length >= params;
   }
 
   static max(value, params) {
     if (typeof value === 'string') {
       return Rule.validateIfNotEmpty(value, () => {
-        return value.length <= params
-      })
+        return value.length <= params;
+      });
     }
 
-    return Object.keys(value).length <= params
+    return Object.keys(value).length <= params;
   }
 
   static email(value) {
     return Rule.validateIfNotEmpty(value, () => {
       const pattern = new RegExp(
         '^[a-zA-Z0-9._-]+@[a-zA-Z0-9]+([.-]?[a-zA-Z0-9]+)?([.]{1}[a-zA-Z]{2,4}){1,4}$'
-      )
-      return pattern.test(value)
-    })
+      );
+      return pattern.test(value);
+    });
   }
 
   static password(value) {
     return Rule.validateIfNotEmpty(value, () => {
       const pattern = new RegExp(
         '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$!%*?&])[A-Za-z\\d@#$!%*?&]{8,30}$'
-      )
-      return pattern.test(value)
-    })
+      );
+      return pattern.test(value);
+    });
   }
 
   static accepted(value) {
-    return ['yes', 'on', 1, '1', true].includes(value)
+    return ['yes', 'on', 1, '1', true].includes(value);
   }
 
   static in(value, params) {
@@ -60,7 +60,7 @@ export default class Rule {
       return params
         .split(',')
         .map(item => item.trim())
-        .includes(value.toString())
-    })
+        .includes(value.toString());
+    });
   }
 }

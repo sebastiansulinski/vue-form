@@ -4,7 +4,7 @@
     :class="computedWrapperCssClass"
     :style="computedWrapperCssStyle"
   >
-    <slot name="validation">
+    <slot>
       <form-validation
         :label="label"
         :id="identity"
@@ -15,25 +15,19 @@
         :error="error"
       ></form-validation>
     </slot>
-    <textarea
+    <input
+      :type="type"
       :id="identity"
       :name="name"
-      :disabled="isDisabled"
+      :value="value"
       :maxlength="maxlength"
       :placeholder="placeholder"
       :autocomplete="autocomplete"
       :class="inputCssClass"
-      :style="inputCssStyle"
       v-focus="focus"
       v-on="inputListeners"
-      v-model="body"
-    ></textarea>
+      :disabled="isDisabled"
+      v-bind="attributeBindings"
+    />
   </div>
 </template>
-<script>
-import BaseTextArea from './BaseTextArea';
-
-export default {
-  mixins: [BaseTextArea]
-};
-</script>
