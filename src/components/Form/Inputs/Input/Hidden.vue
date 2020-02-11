@@ -5,7 +5,7 @@ export default {
   mixins: [Text],
   data() {
     return {
-      type: 'hidden'
+      inputType: 'hidden'
     };
   }
 };

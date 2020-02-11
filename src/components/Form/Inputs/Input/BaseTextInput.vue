@@ -5,7 +5,7 @@ export default {
   mixins: [BaseInput],
   data() {
     return {
-      type: 'text'
+      inputType: 'text'
     };
   },
   computed: {

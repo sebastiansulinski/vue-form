@@ -16,7 +16,7 @@
       ></form-validation>
     </slot>
     <input
-      :type="type"
+      :type="inputType"
       :id="identity"
       :name="name"
       :value="value"
