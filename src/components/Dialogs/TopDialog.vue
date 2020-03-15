@@ -42,7 +42,7 @@
   </base-top-dialog>
 </template>
 <script>
-import BaseTopDialog from './BaseTopDialog'
+import BaseTopDialog from './BaseTopDialog';
 
 export default {
   name: 'top-dialog',
@@ -51,7 +51,7 @@ export default {
     sessionDialog: {
       type: Object,
       default: () => {
-        return {}
+        return {};
       }
     },
     overlayCssClass: {
@@ -63,5 +63,5 @@ export default {
       default: 'active'
     }
   }
-}
+};
 </script>
