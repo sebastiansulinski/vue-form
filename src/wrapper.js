@@ -78,7 +78,7 @@ const Components = {
   MultiSelect,
   TextArea,
   WysiwygEditor,
-  Error
+  Error,
 };
 
 // Declare install function executed by Vue.use()

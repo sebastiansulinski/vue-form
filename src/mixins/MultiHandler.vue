@@ -2,7 +2,7 @@
 export default {
   data() {
     return {
-      items: []
+      items: [],
     };
   },
   mounted() {
@@ -25,7 +25,7 @@ export default {
     remove(item) {
       this.items = this.items.filter(element => element !== item.value);
     },
-    evaluate() {}
-  }
+    evaluate() {},
+  },
 };
 </script>

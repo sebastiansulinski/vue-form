@@ -9,94 +9,98 @@ export default {
   props: {
     group: {
       type: String,
-      required: false
+      required: false,
     },
     label: {
       type: String,
-      required: false
+      required: false,
     },
     name: {
       type: String,
-      required: true
+      required: true,
     },
     id: {
       type: String,
-      required: false
+      required: false,
     },
     value: {
-      default: ''
+      default: '',
     },
     currentValue: {
-      default: ''
+      default: '',
     },
     options: {
       type: [Array, Object, String],
-      default: () => []
+      default: () => [],
     },
     placeholder: {
       type: String,
-      required: false
+      required: false,
     },
     focus: {
       type: Boolean,
-      default: false
+      default: false,
     },
     maxlength: {
       type: String,
-      required: false
+      required: false,
     },
     autocomplete: {
       type: String,
-      required: false
+      required: false,
     },
     validation: {
       type: [Array, Object],
-      default: () => []
+      default: () => [],
     },
     error: {
       type: Object,
-      default: () => new Error()
+      default: () => new Error(),
     },
     visible: {
       type: Boolean,
-      default: true
+      default: true,
     },
     inputCssClass: {
       type: String,
-      required: false
+      required: false,
     },
     validationCssClass: {
       type: String,
-      required: false
+      required: false,
     },
     wrapperErrorCssClass: {
       type: String,
-      default: 'invalid'
+      default: 'invalid',
     },
     wrapperErrorCssStyle: {
       type: String,
-      required: false
+      required: false,
     },
     listen: {
       type: String,
-      required: false
+      required: false,
     },
     fire: {
       type: String,
-      required: false
+      required: false,
     },
     inputBindings: {
       type: Object,
       default: () => {
         return {};
-      }
-    }
+      },
+    },
+    bounceOf: {
+      default: null,
+    },
   },
   data() {
     return {
       identity: this.id ? this.id : this.name,
       displayValidation: false,
-      show: this.visible
+      show: this.visible,
+      interacted: false,
     };
   },
   computed: {
@@ -120,7 +124,7 @@ export default {
     },
     attributeBindings() {
       return this.inputBindings;
-    }
+    },
   },
   beforeDestroy() {
     this.deinitialize();
@@ -153,7 +157,7 @@ export default {
 
       window.EventBus.fire('initialize-' + this.group, {
         field: this.name,
-        rules: rules
+        rules: rules,
       });
     },
     deinitialize() {
@@ -178,7 +182,10 @@ export default {
         return option.id;
       }
       return this.name + '-' + option.value;
-    }
+    },
+    markAsInteracted() {
+      this.interacted = true;
+    },
   },
   watch: {
     disabled(isDisabled) {
@@ -187,7 +194,12 @@ export default {
       } else {
         this.enable();
       }
-    }
-  }
+    },
+    bounceOf(newValue) {
+      if (!this.currentValue && !this.interacted) {
+        this.emit(newValue);
+      }
+    },
+  },
 };
 </script>

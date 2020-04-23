@@ -5,7 +5,7 @@ export default {
   mixins: [BaseInput],
   data() {
     return {
-      checked: this.currentValue
+      checked: this.currentValue,
     };
   },
   mounted() {
@@ -29,7 +29,7 @@ export default {
     },
     update(event) {
       this.emit((this.checked = event.target.value));
-    }
-  }
+    },
+  },
 };
 </script>

@@ -3,6 +3,6 @@ import InputTemplate from './InputTemplate';
 import BaseFloatInput from './BaseFloatInput';
 
 export default {
-  mixins: [InputTemplate, BaseFloatInput]
+  mixins: [InputTemplate, BaseFloatInput],
 };
 </script>

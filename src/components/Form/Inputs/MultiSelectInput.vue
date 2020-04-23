@@ -5,7 +5,7 @@ export default {
   mixins: [BaseInput],
   data() {
     return {
-      selected: this.currentValue || []
+      selected: this.currentValue || [],
     };
   },
   methods: {
@@ -21,7 +21,7 @@ export default {
     },
     isSelected(value) {
       return this.selected.includes(value);
-    }
-  }
+    },
+  },
 };
 </script>

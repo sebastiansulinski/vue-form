@@ -6,16 +6,16 @@ export default {
   props: {
     group: {
       type: String,
-      required: true
+      required: true,
     },
     name: {
       type: String,
-      default: 'items'
+      default: 'items',
     },
     alwaysEnabled: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   created() {
     window.EventBus.listen('disable-started-' + this.group, this.disable);
@@ -30,14 +30,14 @@ export default {
     },
     trigger() {
       throw new Error('Please implement trigger method');
-    }
+    },
   },
   render() {
     return this.$scopedSlots.default({
       isDisabled: this.isDisabled,
       processing: this.processing,
-      trigger: this.conditionalTrigger
+      trigger: this.conditionalTrigger,
     });
-  }
+  },
 };
 </script>

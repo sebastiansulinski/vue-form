@@ -19,7 +19,7 @@ export default {
         this.selected.push(value);
       }
       this.emit(this.selected);
-    }
-  }
+    },
+  },
 };
 </script>

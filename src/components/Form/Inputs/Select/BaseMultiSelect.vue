@@ -11,7 +11,7 @@ export default {
   methods: {
     update() {
       this.emit(this.selected);
-    }
-  }
+    },
+  },
 };
 </script>

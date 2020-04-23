@@ -19,7 +19,8 @@
               <i class="fas fa-check fa-fw"></i> SUBMIT
             </span>
             <span v-else>
-              <i class="fas fa-spinner fa-spin fa-fw"></i> PROCESSING
+              <i class="fas fa-spinner fa-spin fa-fw"></i>
+              PROCESSING
             </span>
           </span>
         </form-trigger>
@@ -67,7 +68,8 @@
                 <i class="fas fa-eraser fa-fw"></i> RESET
               </span>
               <span v-else>
-                <i class="fas fa-spinner fa-spin fa-fw"></i> PROCESSING
+                <i class="fas fa-spinner fa-spin fa-fw"></i>
+                PROCESSING
               </span>
             </span>
           </form-trigger>
@@ -87,7 +89,8 @@
                 <i class="fas fa-times fa-fw"></i> CLEAR
               </span>
               <span v-else>
-                <i class="fas fa-spinner fa-spin fa-fw"></i> PROCESSING
+                <i class="fas fa-spinner fa-spin fa-fw"></i>
+                PROCESSING
               </span>
             </span>
           </form-trigger>
@@ -111,7 +114,7 @@
         reset,
         clear,
         disableEvent,
-        enableEvent
+        enableEvent,
       }"
       :mutators="{ price: value => parseInt(value.replace('.', '')) }"
       v-cloak
@@ -129,30 +132,30 @@
               :options="[
                 {
                   name: 'Mr',
-                  value: 1
+                  value: 1,
                 },
                 {
                   name: 'Mrs',
-                  value: 2
+                  value: 2,
                 },
                 {
                   name: 'Ms',
-                  value: 3
+                  value: 3,
                 },
                 {
                   name: 'Master',
-                  value: 4
+                  value: 4,
                 },
                 {
                   name: 'Miss',
-                  value: 5
-                }
+                  value: 5,
+                },
               ]"
               placeholder="Please select one"
               :focus="true"
               :validation="{
                 required: 'Please select your title',
-                'in:1,2,3,4,5': 'Invalid selection'
+                'in:1,2,3,4,5': 'Invalid selection',
               }"
               :error="error"
               :disabled="isDisabled"
@@ -167,7 +170,7 @@
               v-model="fields.price"
               :validation="{
                 required: 'Please provide the price',
-                integer: 'Invalid price format'
+                integer: 'Invalid price format',
               }"
               :error="error"
               :disabled="isDisabled"
@@ -185,7 +188,7 @@
               :validation="{
                 required: 'Please provide your first name',
                 'min:2': 'Minimum length 2 chars.',
-                'max:30': 'Maximum length 30 chars.'
+                'max:30': 'Maximum length 30 chars.',
               }"
               :error="error"
               :disabled="isDisabled"
@@ -204,7 +207,7 @@
               :validation="{
                 required: 'Please provide your last name',
                 'min:2': 'Minimum length 2 chars.',
-                'max:30': 'Maximum length 30 chars.'
+                'max:30': 'Maximum length 30 chars.',
               }"
               :error="error"
               :disabled="isDisabled"
@@ -219,7 +222,7 @@
               v-model="fields.email"
               :validation="{
                 required: 'Please provide a valid email address',
-                email: 'Invalid email address'
+                email: 'Invalid email address',
               }"
               :error="error"
               :disabled="isDisabled"
@@ -235,7 +238,7 @@
               autocomplete="off"
               :validation="{
                 required: 'Please provide your password',
-                password: 'Invalid password format'
+                password: 'Invalid password format',
               }"
               :error="error"
               :disabled="isDisabled"
@@ -251,24 +254,44 @@
               :options="[
                 {
                   name: 'No',
-                  value: 0
+                  value: 0,
                 },
                 {
                   name: 'Yes',
-                  value: 1
-                }
+                  value: 1,
+                },
               ]"
               current-value="0"
               :validation="{
                 required: 'Please select one option',
-                'in:0,1': 'Invalid selection'
+                'in:0,1': 'Invalid selection',
               }"
               :error="error"
               :disabled="isDisabled"
             ></single-select>
           </div>
 
-          <div class="cell small-12 medium-6">&nbsp;</div>
+          <div class="cell small-12 medium-6">
+            <text-input
+              :group="group"
+              label="Contact card: *"
+              name="contact_card"
+              v-model="fields.contact_card"
+              :validation="{
+                required: 'Please provide your contact card',
+              }"
+              :error="error"
+              :disabled="isDisabled"
+              :bounce-of="
+                fields.first_name +
+                  ' ' +
+                  fields.last_name +
+                  ' <' +
+                  fields.email +
+                  '>'
+              "
+            ></text-input>
+          </div>
         </div>
 
         <div v-if="fields.has_address === 1" class="grid-x grid-margin-x">
@@ -279,7 +302,7 @@
               label="Address line 1: *"
               v-model="fields.address.line_1"
               :validation="{
-                required: 'Please provide your address'
+                required: 'Please provide your address',
               }"
               :error="error"
               :disabled="isDisabled"
@@ -303,7 +326,7 @@
               name="address.town"
               v-model="fields.address.town"
               :validation="{
-                required: 'Please provide your town name'
+                required: 'Please provide your town name',
               }"
               :error="error"
               :disabled="isDisabled"
@@ -328,7 +351,7 @@
               :show="error.has('address.post_code')"
               :validation="{
                 required: 'Please provide your post code',
-                'max:10': 'Maximum 10 characters'
+                'max:10': 'Maximum 10 characters',
               }"
               :error="error"
             ></form-validation>
@@ -349,7 +372,7 @@
                 v-model="fields.share"
                 :validation="{
                   required: 'Invalid selection',
-                  'in:a': 'We have to share your data'
+                  'in:a': 'We have to share your data',
                 }"
                 :error="error"
                 current-value="a"
@@ -365,7 +388,7 @@
                 label="I agree with the privacy policy"
                 v-model="fields.privacy"
                 :validation="{
-                  required: 'You have to agree with our privacy policy'
+                  required: 'You have to agree with our privacy policy',
                 }"
                 :error="error"
                 :remove-when-false="true"
@@ -379,7 +402,7 @@
                 label="I agree with the terms & conditions"
                 v-model="fields.terms"
                 :validation="{
-                  accepted: 'You have to agree with our terms & conditions'
+                  accepted: 'You have to agree with our terms & conditions',
                 }"
                 :error="error"
                 validation-css-class="block"
@@ -400,7 +423,7 @@
               :validation="{
                 required: 'Please select exactly 2 items',
                 min: 'Please select exactly 2 items',
-                max: 'Please select exactly 2 items'
+                max: 'Please select exactly 2 items',
               }"
               :error="error"
               css-class="block"
@@ -414,16 +437,16 @@
                 :options="[
                   {
                     name: 'Blue',
-                    value: 'blue'
+                    value: 'blue',
                   },
                   {
                     name: 'Green',
-                    value: 'green'
+                    value: 'green',
                   },
                   {
                     name: 'Orange',
-                    value: 'orange'
-                  }
+                    value: 'orange',
+                  },
                 ]"
                 v-model="fields.colours"
                 :validation="['required', 'min:2', 'max:2']"
@@ -447,7 +470,7 @@
                 :show="error.has('city')"
                 :validation="{
                   required: 'Please select your city',
-                  in: 'Please select your city'
+                  in: 'Please select your city',
                 }"
                 :error="error"
                 css-class="block"
@@ -459,20 +482,20 @@
                 :options="[
                   {
                     name: 'London',
-                    value: 1
+                    value: 1,
                   },
                   {
                     name: 'Paris',
-                    value: 2
+                    value: 2,
                   },
                   {
                     name: 'Madrid',
-                    value: 3
+                    value: 3,
                   },
                   {
                     name: 'Amsterdam',
-                    value: 6
-                  }
+                    value: 6,
+                  },
                 ]"
                 v-model="fields.city"
                 :validation="['required', 'in:1,2,3,6']"
@@ -494,22 +517,24 @@
               :options="[
                 {
                   name: 'Apple',
-                  value: 'apple'
+                  value: 'apple',
                 },
                 {
                   name: 'Orange',
-                  value: 'orange'
+                  value: 'orange',
                 },
                 {
                   name: 'Grapefruit',
-                  value: 'grapefruit'
+                  value: 'grapefruit',
                 },
                 {
                   name: 'Banana',
-                  value: 'banana'
-                }
+                  value: 'banana',
+                },
               ]"
-              :validation="{ required: 'Please select your fruits' }"
+              :validation="{
+                required: 'Please select your fruits',
+              }"
               :error="error"
               :current-value="['banana', 'apple']"
               input-css-class="margin-bottom-0"
@@ -527,7 +552,7 @@
         :validation="{
           required: 'Please provide the excerpt',
           'min:3': 'Minimum 3 characters',
-          'max:10': 'Maximum 10 characters'
+          'max:10': 'Maximum 10 characters',
         }"
         :error="error"
         :disabled="isDisabled"
@@ -541,7 +566,7 @@
         label="Body: *"
         v-model="fields.body"
         :validation="{
-          required: 'Please provide the body'
+          required: 'Please provide the body',
         }"
         :error="error"
         contents-css="./assets/editor.css"
@@ -626,20 +651,20 @@ export default {
   name: 'app',
   components: VueForm,
   created() {
-    EventBus.listen('confirmation-called', () => {
+    window.EventBus.listen('confirmation-called', () => {
       window.location.reload();
     });
   },
   methods: {
     confirm() {
-      EventBus.fire('top-confirm', {
+      window.EventBus.fire('top-confirm', {
         id: 'confirmation',
         message: 'Are you sure you wish to remove it?',
         url: 'http://localhost:3000/posts',
         method: 'get',
-        behaviour: 'reload'
+        behaviour: 'reload',
       });
-    }
-  }
+    },
+  },
 };
 </script>

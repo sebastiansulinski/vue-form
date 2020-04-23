@@ -33,6 +33,6 @@
 import BaseMasterCheckboxInput from './BaseMasterCheckboxInput';
 
 export default {
-  mixins: [BaseMasterCheckboxInput]
+  mixins: [BaseMasterCheckboxInput],
 };
 </script>

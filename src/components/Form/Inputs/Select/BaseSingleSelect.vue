@@ -7,23 +7,23 @@ export default {
   props: {
     dependsOn: {
       type: [Number, String],
-      required: false
+      required: false,
     },
     fields: {
       type: Object,
       default: () => {
         return {};
-      }
+      },
     },
     isLast: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
       selected: this.currentValue,
-      records: []
+      records: [],
     };
   },
   computed: {
@@ -34,10 +34,10 @@ export default {
       return {
         id: this.name,
         items: Object.assign(this.fields, {
-          [this.name]: this.selected
-        })
+          [this.name]: this.selected,
+        }),
       };
-    }
+    },
   },
   mounted() {
     this.fetch();
@@ -96,7 +96,7 @@ export default {
       if (this.isLast) {
         this.fetch();
       }
-    }
+    },
   },
   watch: {
     dependsOn(value) {
@@ -108,7 +108,7 @@ export default {
         this.fetch();
       }
       this.emit(this.selected);
-    }
-  }
+    },
+  },
 };
 </script>

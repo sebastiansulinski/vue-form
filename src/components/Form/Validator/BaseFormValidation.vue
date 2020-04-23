@@ -5,29 +5,29 @@ export default {
   props: {
     label: {
       type: String,
-      required: false
+      required: false,
     },
     name: {
       type: String,
-      required: true
+      required: true,
     },
     show: {
       type: Boolean,
-      default: false
+      default: false,
     },
     validation: {
       type: [Array, Object],
-      default: () => []
+      default: () => [],
     },
     error: {
       type: Object,
-      default: () => new Error()
-    }
+      default: () => new Error(),
+    },
   },
   computed: {
     showLabel() {
       return this.label || this.show;
-    }
+    },
   },
   methods: {
     showErrorFor(rule) {
@@ -35,15 +35,15 @@ export default {
     },
     ruleOnly(rule) {
       return rule.split(':')[0];
-    }
+    },
   },
   render() {
     return this.$scopedSlots.default({
       showLabel: this.showLabel,
       showErrorFor: this.showErrorFor,
       ruleOnly: this.ruleOnly,
-      validation: this.validation
+      validation: this.validation,
     });
-  }
+  },
 };
 </script>

@@ -6,13 +6,13 @@ export default {
   props: {
     height: {
       type: String,
-      default: '7rem'
-    }
+      default: '7rem',
+    },
   },
   data() {
     return {
       currentBody: '',
-      body: ''
+      body: '',
     };
   },
   computed: {
@@ -20,14 +20,14 @@ export default {
       return Object.assign({}, this.$listeners, {
         input: () => {
           this.emit(this.body);
-        }
+        },
       });
     },
     inputCssStyle() {
       return {
-        height: this.height
+        height: this.height,
       };
-    }
+    },
   },
   mounted() {
     this.currentBody = this.$slots.body ? this.$slots.body[0].text : '';
@@ -41,7 +41,7 @@ export default {
     },
     clear() {
       this.emit((this.body = null));
-    }
-  }
+    },
+  },
 };
 </script>

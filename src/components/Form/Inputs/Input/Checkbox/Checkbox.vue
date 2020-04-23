@@ -32,6 +32,6 @@
 import BaseCheckboxInput from './BaseCheckboxInput';
 
 export default {
-  mixins: [BaseCheckboxInput]
+  mixins: [BaseCheckboxInput],
 };
 </script>

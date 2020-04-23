@@ -7,7 +7,7 @@
       message,
       clear,
       makeCall,
-      processing
+      processing,
     }"
   >
     <div id="top-dialog" :class="{ [overlayCssClass]: overlay }">
@@ -52,16 +52,16 @@ export default {
       type: Object,
       default: () => {
         return {};
-      }
+      },
     },
     overlayCssClass: {
       type: String,
-      default: 'overlay'
+      default: 'overlay',
     },
     visibleCssClass: {
       type: String,
-      default: 'active'
-    }
-  }
+      default: 'active',
+    },
+  },
 };
 </script>

@@ -7,17 +7,17 @@ export default {
   props: {
     total: {
       type: Number,
-      required: true
+      required: true,
     },
     fire: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       checked: false,
-      indeterminate: false
+      indeterminate: false,
     };
   },
   methods: {
@@ -28,7 +28,7 @@ export default {
     },
     update() {
       window.EventBus.fire(this.fire, this.checked);
-    }
-  }
+    },
+  },
 };
 </script>

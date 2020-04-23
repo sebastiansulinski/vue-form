@@ -5,8 +5,8 @@ export default {
   mixins: [Text],
   data() {
     return {
-      inputType: 'date'
+      inputType: 'date',
     };
-  }
+  },
 };
 </script>

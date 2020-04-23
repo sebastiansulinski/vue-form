@@ -34,6 +34,6 @@
 import BaseTextArea from './BaseTextArea';
 
 export default {
-  mixins: [BaseTextArea]
+  mixins: [BaseTextArea],
 };
 </script>

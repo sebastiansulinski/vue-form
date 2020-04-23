@@ -28,6 +28,6 @@
 import BaseCheckboxGroupInput from './BaseCheckboxGroupInput';
 
 export default {
-  mixins: [BaseCheckboxGroupInput]
+  mixins: [BaseCheckboxGroupInput],
 };
 </script>

@@ -28,7 +28,7 @@ import {
   Helper,
   Disabler,
   AjaxCaller,
-  ErrorReporter
+  ErrorReporter,
 } from '@ssdcode/cms-partials';
 
 export default {
@@ -37,34 +37,34 @@ export default {
   props: {
     group: {
       type: String,
-      required: false
+      required: false,
     },
     behaviour: {
       type: String,
-      required: false
+      required: false,
     },
     mutators: {
       type: Object,
       default: () => {
         return {};
-      }
+      },
     },
     eventSubmitOnly: {
       type: Boolean,
-      default: false
+      default: false,
     },
     collections: {
       type: Object,
       default: () => {
         return {};
-      }
+      },
     },
     summary: {
       type: Object,
       default: () => {
         return {};
-      }
-    }
+      },
+    },
   },
   data() {
     return {
@@ -72,13 +72,13 @@ export default {
       validationBag: {},
       error: new Error(),
       summaryBag: this.summary,
-      rule: Rule
+      rule: Rule,
     };
   },
   computed: {
     requestData() {
       return this.mutate({ ...this.fields });
-    }
+    },
   },
   created() {
     window.EventBus.listen('submit-' + this.group, this.submitEvent);
@@ -100,14 +100,14 @@ export default {
     startProcessingAjaxCallEvent() {
       window.EventBus.fire([
         'submission-started-' + this.group,
-        'disable-started-' + this.group
+        'disable-started-' + this.group,
       ]);
     },
     stopProcessingAjaxCallEvent() {
       this.enable();
       window.EventBus.fire([
         'submission-ended-' + this.group,
-        'disable-ended-' + this.group
+        'disable-ended-' + this.group,
       ]);
     },
     initialize(data) {
@@ -240,7 +240,7 @@ export default {
       });
 
       this.error.set(errors);
-    }
-  }
+    },
+  },
 };
 </script>

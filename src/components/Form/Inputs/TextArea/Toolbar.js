@@ -12,17 +12,17 @@ export default {
         'PasteFromWord',
         '-',
         'Undo',
-        'Redo'
-      ]
+        'Redo',
+      ],
     },
     { name: 'links', items: ['Link', 'Unlink'] },
     {
       name: 'insert',
-      items: ['Image', 'Table', 'pbckcode', 'Templates', 'qrc', 'SpecialChar']
+      items: ['Image', 'Table', 'pbckcode', 'Templates', 'qrc', 'SpecialChar'],
     },
     {
       name: 'basicstyles',
-      items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat']
+      items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'],
     },
     {
       name: 'paragraph',
@@ -33,12 +33,12 @@ export default {
         'Outdent',
         'Indent',
         '-',
-        'Blockquote'
-      ]
+        'Blockquote',
+      ],
     },
     {
       name: 'stylesmenus',
-      items: ['Subscript', 'Styles', 'Format', 'CmdTokens']
-    }
-  ]
+      items: ['Subscript', 'Styles', 'Format', 'CmdTokens'],
+    },
+  ],
 };

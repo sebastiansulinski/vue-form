@@ -6,24 +6,24 @@ export default {
   props: {
     removeWhenFalse: {
       type: Boolean,
-      default: false
+      default: false,
     },
     trueValue: {
-      default: true
+      default: true,
     },
     falseValue: {
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
-      checked: this.isSelected()
+      checked: this.isSelected(),
     };
   },
   computed: {
     valueToEmit() {
       return this.checked ? this.trueValue : this.falseValue;
-    }
+    },
   },
   mounted() {
     this.update();
@@ -43,7 +43,7 @@ export default {
     emitFireEvent() {
       BaseInput.methods.emitFireEvent.call(this, {
         value: this.trueValue,
-        remove: !this.checked
+        remove: !this.checked,
       });
       this.$emit('input', this.valueToEmit);
     },
@@ -64,7 +64,7 @@ export default {
     clear() {
       this.checked = false;
       this.update();
-    }
-  }
+    },
+  },
 };
 </script>

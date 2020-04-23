@@ -7,8 +7,8 @@ export default {
   props: {
     fire: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   created() {
     window.EventBus.listen(
@@ -23,7 +23,7 @@ export default {
   methods: {
     trigger() {
       window.EventBus.fire(this.fire + '-' + this.group);
-    }
-  }
+    },
+  },
 };
 </script>

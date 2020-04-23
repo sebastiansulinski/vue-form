@@ -27,14 +27,14 @@ export default {
   props: {
     contentsCss: {
       type: String,
-      required: false
+      required: false,
     },
     config: {
       type: Object,
       default: () => {
         return {};
-      }
-    }
+      },
+    },
   },
   data() {
     return {
@@ -50,15 +50,15 @@ export default {
         format_ul: {
           element: 'ul',
           name: 'List',
-          attributes: { class: 'list' }
+          attributes: { class: 'list' },
         },
         startupOutlineBlocks: true,
         allowedContent: true,
         templates_replaceContent: false,
         htmlEncodeOutput: false,
         entities: false,
-        readOnly: this.isDisabled
-      }
+        readOnly: this.isDisabled,
+      },
     };
   },
   mounted() {
@@ -95,12 +95,12 @@ export default {
     clear() {
       this.setData('');
       this.emit('');
-    }
+    },
   },
   watch: {
     isDisabled(isReadOnly) {
       this.editor.setReadOnly(isReadOnly);
-    }
-  }
+    },
+  },
 };
 </script>

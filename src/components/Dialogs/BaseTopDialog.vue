@@ -2,9 +2,9 @@
 import {
   AjaxCaller,
   EscapeHandler,
-  ErrorReporter
+  ErrorReporter,
 } from '@ssdcode/cms-partials';
-
+import Behaviour from '../Form/Behaviour';
 export default {
   name: 'base-top-dialog',
   mixins: [AjaxCaller, EscapeHandler],
@@ -13,8 +13,8 @@ export default {
       type: Object,
       default: () => {
         return {};
-      }
-    }
+      },
+    },
   },
   data() {
     return {
@@ -24,7 +24,7 @@ export default {
       url: null,
       data: {},
       methodType: 'get',
-      timeout: null
+      timeout: null,
     };
   },
   computed: {
@@ -33,20 +33,20 @@ export default {
     },
     overlay() {
       return this.isVisible && this.typeIs('confirm');
-    }
+    },
   },
   created() {
-    EventBus.listen('clear-top-dialog', this.clear);
-    EventBus.listen('top-alert', this.alertEvent);
-    EventBus.listen('top-warning', this.warningEvent);
-    EventBus.listen('top-confirm', this.confirmEvent);
+    window.EventBus.listen('clear-top-dialog', this.clear);
+    window.EventBus.listen('top-alert', this.alertEvent);
+    window.EventBus.listen('top-warning', this.warningEvent);
+    window.EventBus.listen('top-confirm', this.confirmEvent);
   },
   mounted() {
     if (Object.keys(this.sessionDialog).length) {
       setTimeout(() => {
-        EventBus.fire(this.sessionDialog.type, {
+        window.EventBus.fire(this.sessionDialog.type, {
           id: 'session-' + this.sessionDialog.type,
-          message: this.sessionDialog.message
+          message: this.sessionDialog.message,
         });
       }, 500);
     }
@@ -69,7 +69,7 @@ export default {
       this.data = {};
       this.methodType = 'get';
       this.stopProcessingAjaxCall();
-      EventBus.fire(this.id + '-cleared', data || {});
+      window.EventBus.fire(this.id + '-cleared', data || {});
     },
     clearCountDown() {
       if (this.timeout === null) {
@@ -126,9 +126,9 @@ export default {
       }
     },
     success(response) {
-      EventBus.fire(this.id + '-called', {
+      window.EventBus.fire(this.id + '-called', {
         response: response,
-        dialog: this
+        dialog: this,
       });
     },
     failure(error) {
@@ -136,11 +136,11 @@ export default {
         (error.response || {}).status &&
         [301, 302].includes(error.response.status)
       ) {
-        new Behaviour(this, 'redirect', error.response);
+        Behaviour.redirect(this, error.response);
         return;
       }
       ErrorReporter.report(error, null, null, this.stopProcessingAjaxCall);
-    }
+    },
   },
   render() {
     return this.$scopedSlots.default({
@@ -149,8 +149,8 @@ export default {
       message: this.message,
       clear: this.clear,
       processing: this.processing,
-      makeCall: this.makeCall
+      makeCall: this.makeCall,
     });
-  }
+  },
 };
 </script>

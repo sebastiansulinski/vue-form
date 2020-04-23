@@ -6,21 +6,21 @@ export default {
   props: {
     decimals: {
       type: Number,
-      default: 2
+      default: 2,
     },
     currentValue: {
-      default: '0.00'
-    }
+      default: '0.00',
+    },
   },
   data() {
     return {
-      inputType: 'number'
+      inputType: 'number',
     };
   },
   computed: {
     attributeBindings() {
       return { ...{ step: '.01' }, ...this.inputBindings };
-    }
+    },
   },
   methods: {
     mutate(value) {
@@ -37,7 +37,7 @@ export default {
         '.' +
         value.substr(value.length - this.decimals)
       );
-    }
-  }
+    },
+  },
 };
 </script>

@@ -23,6 +23,6 @@
 import BaseRadioInput from './BaseRadioInput';
 
 export default {
-  mixins: [BaseRadioInput]
+  mixins: [BaseRadioInput],
 };
 </script>

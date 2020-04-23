@@ -30,34 +30,34 @@ export default {
   props: {
     id: {
       type: String,
-      required: true
+      required: true,
     },
     label: {
       type: String,
-      required: false
+      required: false,
     },
     name: {
       type: String,
-      required: true
+      required: true,
     },
     show: {
       type: Boolean,
-      default: false
+      default: false,
     },
     cssClass: {
       type: [Array, Object, String],
-      required: false
+      required: false,
     },
     validation: {
       type: Object,
       default: () => {
         return {};
-      }
+      },
     },
     error: {
       type: Object,
-      default: () => new Error()
-    }
-  }
+      default: () => new Error(),
+    },
+  },
 };
 </script>

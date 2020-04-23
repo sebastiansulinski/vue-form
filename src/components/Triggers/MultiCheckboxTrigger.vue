@@ -10,17 +10,17 @@ export default {
   props: {
     behaviour: {
       type: String,
-      required: false
+      required: false,
     },
     listen: {
       type: String,
-      required: false
-    }
+      required: false,
+    },
   },
   computed: {
     requestData() {
       return { items: this.items };
-    }
+    },
   },
   methods: {
     evaluate() {
@@ -61,7 +61,7 @@ export default {
         null,
         this.stopProcessingAjaxCall
       );
-    }
-  }
+    },
+  },
 };
 </script>

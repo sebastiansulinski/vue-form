@@ -40,6 +40,6 @@
 import BaseMultiSelect from './BaseMultiSelect';
 
 export default {
-  mixins: [BaseMultiSelect]
+  mixins: [BaseMultiSelect],
 };
 </script>

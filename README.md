@@ -746,3 +746,22 @@ The above form will send the request with value for `price` index an integer of 
 Please note that `current-value` is also provided as `integer` type - this will automatically be converted to a `float` when the component is created and allows to pass the value directly from the database without necessity of manually converting it to the decimal point.
 
 Float input has `:decimals` property that determines the number of decimal places, for example `:decimals="3"` would display 3 digits after the decimal point.
+
+## Bouncing
+
+If you need the field to update with the values of another field when empty, you can use `:bounce-of` property:
+
+```html
+<text-input
+  :group="group"
+  label="Contact card: *"
+  name="contact_card"
+  v-model="fields.contact_card"
+  :validation="{
+    required: 'Please provide your contact card',
+  }"
+  :error="error"
+  :disabled="isDisabled"
+  :bounce-of="(fields.first_name + ' ' + fields.last_name + ' <' + fields.email + '>')"
+></text-input>
+``` 

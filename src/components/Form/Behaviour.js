@@ -18,7 +18,7 @@ export default class Behaviour {
 
     window.EventBus.fire('top-alert', {
       id: form.group,
-      message: response.data.message
+      message: response.data.message,
     });
   }
 

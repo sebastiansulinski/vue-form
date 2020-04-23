@@ -38,6 +38,6 @@
 <script>
 import BaseSingleSelect from './BaseSingleSelect';
 export default {
-  mixins: [BaseSingleSelect]
+  mixins: [BaseSingleSelect],
 };
 </script>
