@@ -42,7 +42,7 @@ export default {
       default: false,
     },
     maxlength: {
-      type: String,
+      type: Number,
       required: false,
     },
     autocomplete: {
