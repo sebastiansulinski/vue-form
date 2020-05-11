@@ -3,12 +3,6 @@ import BaseInput from './../BaseInput';
 
 export default {
   mixins: [BaseInput],
-  props: {
-    height: {
-      type: String,
-      default: '7rem',
-    },
-  },
   data() {
     return {
       currentBody: '',
@@ -22,11 +16,6 @@ export default {
           this.emit(this.body);
         },
       });
-    },
-    inputCssStyle() {
-      return {
-        height: this.height,
-      };
     },
   },
   mounted() {

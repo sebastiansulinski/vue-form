@@ -23,7 +23,6 @@
       :placeholder="placeholder"
       :autocomplete="autocomplete"
       :class="inputCssClass"
-      :style="inputCssStyle"
       v-focus="focus"
       v-on="inputListeners"
       v-model="body"
