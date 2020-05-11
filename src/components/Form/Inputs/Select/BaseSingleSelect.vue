@@ -41,7 +41,10 @@ export default {
   },
   created() {
     if (this.listen) {
-      const handler = selected => (this.selected = selected);
+      const handler = selected => {
+        this.selected = selected;
+        this.change();
+      };
       window.EventBus.listen(this.listen, handler);
 
       this.$once('hook:beforeDestroy', () => {
@@ -101,14 +104,21 @@ export default {
     clear() {
       this.emit((this.selected = ''));
     },
-    update() {
+    change(callback = null) {
       this.emit(this.selected);
-      if (this.fire) {
-        window.EventBus.fire(this.fire, this.selected);
+      if (callback) {
+        callback();
       }
       if (this.isLast) {
         this.fetch();
       }
+    },
+    update() {
+      this.change(() => {
+        if (this.fire) {
+          window.EventBus.fire(this.fire, this.selected);
+        }
+      });
     },
   },
   watch: {
