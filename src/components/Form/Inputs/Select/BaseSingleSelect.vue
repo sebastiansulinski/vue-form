@@ -39,6 +39,16 @@ export default {
       };
     },
   },
+  created() {
+    if (this.listen) {
+      const handler = selected => (this.selected = selected);
+      window.EventBus.listen(this.listen, handler);
+
+      this.$once('hook:beforeDestroy', () => {
+        window.EventBus.unlisten(this.listen, handler);
+      });
+    }
+  },
   mounted() {
     this.fetch();
     this.emit(this.selected);
@@ -93,6 +103,9 @@ export default {
     },
     update() {
       this.emit(this.selected);
+      if (this.fire) {
+        window.EventBus.fire(this.fire, this.selected);
+      }
       if (this.isLast) {
         this.fetch();
       }
