@@ -65,7 +65,7 @@ export default {
     },
     callSuccessful(response) {
       this.stopProcessingAjaxCall();
-      this.records = response.data.records;
+      this.records = response.data;
       if (response.data.summary) {
         window.EventBus.fire(
           'update-summary-' + this.group,

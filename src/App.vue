@@ -183,7 +183,7 @@
               label="First name: *"
               name="first_name"
               v-model="fields.first_name"
-              maxlength="30"
+              :maxlength="30"
               autocomplete="given-name"
               :validation="{
                 required: 'Please provide your first name',
@@ -202,7 +202,7 @@
               label="Last name: *"
               name="last_name"
               v-model="fields.last_name"
-              maxlength="30"
+              :maxlength="30"
               autocomplete="family-name"
               :validation="{
                 required: 'Please provide your last name',
