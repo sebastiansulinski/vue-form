@@ -68,7 +68,7 @@ export default class Rule {
       const values = params.split(',').map(item => item.trim());
 
       try {
-        value.forEach(v => {
+        (Array.isArray(value) ? value : new Array(value)).forEach(v => {
           if (!values.includes(v.toString())) {
             throw new Error('Invalid selection');
           }
