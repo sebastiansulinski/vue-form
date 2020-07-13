@@ -14,6 +14,10 @@ export default class Rule {
   }
 
   static min(value, params) {
+    if (isFinite(value)) {
+      return Number(value) >= params;
+    }
+
     if (typeof value === 'string') {
       return Rule.validateIfNotEmpty(value, () => {
         return value.length >= params;
@@ -24,6 +28,10 @@ export default class Rule {
   }
 
   static max(value, params) {
+    if (isFinite(value)) {
+      return Number(value) <= params;
+    }
+
     if (typeof value === 'string') {
       return Rule.validateIfNotEmpty(value, () => {
         return value.length <= params;
