@@ -16,7 +16,7 @@ This package makes use of the following packages
 
 ```javascript
 vue
-@ssdcode/cms-partial
+@ssdcode/cms-partials
 @ssdcode/vue-event-bus
 @ssdcode/vue-focus-directive
 ```
