@@ -1,19 +1,14 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "First post",
-      "rating": "1"
-    },
-    {
-      "id": 2,
-      "title": "Second post",
-      "rating": "1"
-    },
-    {
-      "id": 3,
-      "title": "Third post",
-      "rating": "1"
+  "profile": {
+    "value": {
+      "title": "",
+      "name": "Seb",
+      "address": {
+        "billing": {},
+        "shipping": {}
+      },
+      "shipping_same": false,
+      "body": "<div class=\"mt-10 relative lg:mt-0\"><img alt=\"Image\" class=\"relative rounded-md mx-auto\" src=\"https://images.unsplash.com/photo-1546851985-99a1f88224f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=80\" /></div>"
     }
-  ]
+  }
 }

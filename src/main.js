@@ -1,16 +1,13 @@
 import Vue from 'vue';
-import EventBus from '@ssdcode/vue-event-bus';
-import { FocusDirective } from '@ssdcode/vue-focus-directive';
-
-window.EventBus = window.EventBus || new EventBus();
+import VueCompositionApi from '@vue/composition-api';
+Vue.use(VueCompositionApi);
 
 import App from './App.vue';
+import store from './store';
 
 Vue.config.productionTip = false;
 
 new Vue({
-  directives: {
-    FocusDirective,
-  },
+  store,
   render: h => h(App),
 }).$mount('#app');

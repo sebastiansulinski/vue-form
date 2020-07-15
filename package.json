@@ -7,60 +7,41 @@
     "url": "https://github.com/sebastiansulinski/vue-form.git"
   },
   "homepage": "https://github.com/sebastiansulinski/vue-form#readme",
-  "main": "./dist/vue-form.common.js",
+  "main": "./src/index.js",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name vue-form ./src/wrapper.js",
+    "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@ssdcode/cms-partials": "^1.3.1",
-    "@ssdcode/vue-event-bus": "^0.1.7",
-    "@ssdcode/vue-focus-directive": "^0.2.1",
-    "vue": "^2.6.11"
+    "@ssdcode/js-behaviours": "^0.1.2",
+    "@ssdcode/js-caller": "^1.0.4",
+    "@ssdcode/vue-notification": "^0.1.3",
+    "@vue/composition-api": "^1.0.0-beta.3",
+    "core-js": "^3.6.5",
+    "vue": "^2.6.11",
+    "vue-template-compiler": "^2.6.11",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
+    "@ssdcode/vue-form-inputs": "^0.2.2",
     "@vue/cli-plugin-babel": "^4.4.6",
     "@vue/cli-plugin-eslint": "^4.4.6",
+    "@vue/cli-plugin-unit-jest": "^4.4.6",
+    "@vue/cli-plugin-vuex": "^4.4.6",
     "@vue/cli-service": "^4.4.6",
     "@vue/eslint-config-prettier": "^6.0.0",
+    "@vue/test-utils": "^1.0.3",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.4.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-vue": "^6.2.2",
-    "foundation-sites": "^6.6.3",
     "json-server": "^0.16.1",
-    "node-sass": "^4.14.1",
-    "sass-loader": "^9.0.2",
-    "vue-template-compiler": "^2.6.11"
+    "prettier": "^2.0.5",
+    "tailwindcss": "^1.4.6"
   },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended",
-      "@vue/prettier"
-    ],
-    "rules": {
-      "no-console": "off",
-      "no-debugger": "off",
-      "no-prototype-builtins": "off"
-    },
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "prettier": {
-    "trailingComma": "es5",
-    "tabWidth": 2,
-    "semi": true,
-    "singleQuote": true
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ]
+  "publishConfig": {
+    "access": "public"
+  }
 }
