@@ -14,7 +14,7 @@ export default {
     update(event) {
       const value = event.target.value;
       if (this.isSelected(value)) {
-        this.selected = this.selected.filter(element => element !== value);
+        this.selected = this.selected.filter((element) => element !== value);
       } else {
         this.selected.push(value);
       }

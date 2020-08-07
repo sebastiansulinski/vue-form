@@ -111,9 +111,10 @@ export default {
       ]);
     },
     initialize(data) {
-      if (!this.validationBag.hasOwnProperty(data.field)) {
-        this.validationBag[data.field] = data.rules;
-      }
+      this.validationBag[data.field] = {
+        rules: data.rules,
+        validateIf: data.validateIf,
+      };
     },
     deinitialize(field) {
       if (this.validationBag.hasOwnProperty(field)) {
@@ -130,7 +131,7 @@ export default {
       if (Object.keys(this.mutators).length === 0) {
         return fields;
       }
-      Object.keys(this.mutators).forEach(key => {
+      Object.keys(this.mutators).forEach((key) => {
         fields[key] = this.mutators[key](fields[key]);
       });
       return fields;
@@ -178,9 +179,7 @@ export default {
       if (this.isDisabled) {
         return;
       }
-      this.validate()
-        .then(this.makeCall)
-        .catch(this.callFailed);
+      this.validate().then(this.makeCall).catch(this.callFailed);
     },
     validate() {
       this.error = new Error();
@@ -235,7 +234,7 @@ export default {
       );
     },
     setServerErrors(errors) {
-      Object.keys(errors).forEach(key => {
+      Object.keys(errors).forEach((key) => {
         errors[key] = errors[key][0];
       });
 

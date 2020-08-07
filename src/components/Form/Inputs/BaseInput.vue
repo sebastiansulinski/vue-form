@@ -2,7 +2,6 @@
 import Error from '../Validator/Error';
 import FormValidation from '../Validator/FormValidation';
 import { Helper, Disabler } from '@ssdcode/cms-partials';
-
 export default {
   mixins: [Disabler],
   components: { FormValidation },
@@ -52,6 +51,10 @@ export default {
     validation: {
       type: [Array, Object],
       default: () => [],
+    },
+    validateIf: {
+      type: Boolean,
+      default: true,
     },
     error: {
       type: Object,
@@ -158,6 +161,7 @@ export default {
       window.EventBus.fire('initialize-' + this.group, {
         field: this.name,
         rules: rules,
+        validateIf: this.validateIf,
       });
     },
     deinitialize() {
@@ -199,6 +203,9 @@ export default {
       if (!this.currentValue && !this.interacted) {
         this.emit(newValue);
       }
+    },
+    validateIf() {
+      this.initialize();
     },
   },
 };

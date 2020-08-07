@@ -11,7 +11,7 @@ export default {
   computed: {
     inputListeners() {
       return Object.assign({}, this.$listeners, {
-        input: event => {
+        input: (event) => {
           this.markAsInteracted();
           this.emit(event.target.value);
         },

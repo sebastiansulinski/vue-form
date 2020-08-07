@@ -8,7 +8,7 @@ export default class Validator {
 
     Promise.all(this.promises())
       .then(resolve)
-      .catch(error => {
+      .catch((error) => {
         wrapper.error.set(this.errors);
         reject({ message: error });
       });
@@ -17,20 +17,21 @@ export default class Validator {
   promises() {
     let promises = [];
 
-    for (let field in this.validationBag) {
-      promises.push(this.validate(field));
+    for (const [field, data] of Object.entries(this.validationBag)) {
+      if (data.validateIf) {
+        promises.push(this.validate(field, data.rules));
+      }
     }
 
     return promises;
   }
 
-  validate(field) {
+  validate(field, rules) {
     return new Promise((resolve, reject) => {
-      const rules = this.validationBag[field],
-        rulesCount = rules.length,
+      const rulesCount = rules.length,
         value = this.getValue(field);
 
-      for (let index in rules) {
+      for (const index in rules) {
         if (!this.errors.hasOwnProperty(field)) {
           let [rule, params] = rules[index].split(':');
 

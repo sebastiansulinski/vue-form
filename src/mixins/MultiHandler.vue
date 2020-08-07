@@ -13,7 +13,7 @@ export default {
       if (!this.listen) {
         return;
       }
-      window.EventBus.listen(this.listen, item => {
+      window.EventBus.listen(this.listen, (item) => {
         if (item.remove) {
           this.remove(item);
         } else if (item.value && !this.items.includes(item.value)) {
@@ -23,7 +23,7 @@ export default {
       });
     },
     remove(item) {
-      this.items = this.items.filter(element => element !== item.value);
+      this.items = this.items.filter((element) => element !== item.value);
     },
     evaluate() {},
   },

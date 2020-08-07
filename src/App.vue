@@ -116,7 +116,7 @@
         disableEvent,
         enableEvent,
       }"
-      :mutators="{ price: value => parseInt(value.replace('.', '')) }"
+      :mutators="{ price: (value) => parseInt(value.replace('.', '')) }"
       v-cloak
     >
       <fieldset class="fieldset">
@@ -209,6 +209,7 @@
                 'min:2': 'Minimum length 2 chars.',
                 'max:30': 'Maximum length 30 chars.',
               }"
+              :validate-if="fields.title === 1"
               :error="error"
               :disabled="isDisabled"
             ></text-input>
@@ -284,11 +285,11 @@
               :disabled="isDisabled"
               :bounce-of="
                 fields.first_name +
-                  ' ' +
-                  fields.last_name +
-                  ' <' +
-                  fields.email +
-                  '>'
+                ' ' +
+                fields.last_name +
+                ' <' +
+                fields.email +
+                '>'
               "
             ></text-input>
           </div>

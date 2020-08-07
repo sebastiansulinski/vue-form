@@ -65,10 +65,10 @@ export default class Rule {
 
   static in(value, params) {
     return Rule.validateIfNotEmpty(value, () => {
-      const values = params.split(',').map(item => item.trim());
+      const values = params.split(',').map((item) => item.trim());
 
       try {
-        (Array.isArray(value) ? value : new Array(value)).forEach(v => {
+        (Array.isArray(value) ? value : new Array(value)).forEach((v) => {
           if (!values.includes(v.toString())) {
             throw new Error('Invalid selection');
           }

@@ -34,7 +34,7 @@ export default {
   methods: {
     registerCustomListeners() {
       if (this.listen) {
-        window.EventBus.listen(this.listen, checked => {
+        window.EventBus.listen(this.listen, (checked) => {
           this.checked = checked;
           this.emitFireEvent();
         });
