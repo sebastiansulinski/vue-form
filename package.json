@@ -1,6 +1,6 @@
 {
   "name": "@ssdcode/vue-form",
-  "version": "1.7.10",
+  "version": "1.8.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -60,7 +60,10 @@
     "tabWidth": 2,
     "semi": true,
     "singleQuote": true,
-    "arrow-parens": ["as-needed", "ban-single-arg-parens"]
+    "arrow-parens": [
+      "as-needed",
+      "ban-single-arg-parens"
+    ]
   },
   "browserslist": [
     "> 1%",
