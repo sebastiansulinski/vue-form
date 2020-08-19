@@ -16,6 +16,7 @@
       :processing="processing"
       :isDisabled="isDisabled"
       :rule="rule"
+      :message="message"
     ></slot>
   </form>
 </template>
@@ -73,6 +74,7 @@ export default {
       error: new Error(),
       summaryBag: this.summary,
       rule: Rule,
+      message: null,
     };
   },
   computed: {

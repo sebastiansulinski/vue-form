@@ -13,11 +13,19 @@ export default class Behaviour {
     Behaviour.confirm(form, response);
   }
 
+  static message(form, response) {
+    form.enable();
+    form.reset();
+    form.stopProcessingAjaxCall();
+
+    form.message = response.data.message;
+  }
+
   static confirm(form, response) {
     form.stopProcessingAjaxCall();
 
     window.EventBus.fire('top-alert', {
-      id: form.group,
+      id: form.group + '-form-behaviour',
       message: response.data.message,
     });
   }
