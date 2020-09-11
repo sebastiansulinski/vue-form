@@ -127,7 +127,7 @@
             <single-select
               :group="group"
               name="title"
-              label="Title: *"
+              label="&lt;strong&gt;Title: *&lt;/strong&gt;"
               v-model="fields.title"
               :options="[
                 {

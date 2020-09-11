@@ -8,7 +8,7 @@
     v-slot:default="{ showLabel, showErrorFor, validation }"
   >
     <label :for="id" v-if="showLabel">
-      <span v-if="label" v-text="label"></span>
+      <span v-if="label" v-html="label"></span>
       <span class="validation" v-show="show">
         <span
           :class="cssClass"
