@@ -448,9 +448,18 @@
                     name: 'Orange',
                     value: 'orange',
                   },
+                  {
+                    name: 'Dark red',
+                    value: 'dark red',
+                  },
                 ]"
                 v-model="fields.colours"
-                :validation="['required', 'min:2', 'max:2']"
+                :validation="[
+                  'required',
+                  'min:2',
+                  'max:2',
+                  'in:[&quot;blue&quot;, &quot;green&quot;, &quot;orange&quot;, &quot;dark red&quot;]',
+                ]"
                 :error="error"
                 :disabled="isDisabled"
               ></checkbox-group-input>

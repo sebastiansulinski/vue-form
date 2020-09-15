@@ -64,6 +64,9 @@ export default class Rule {
   }
 
   static in(value, params) {
+    if (params.substring(0, 1) === '[') {
+      params = JSON.parse(params);
+    }
     return Rule.validateIfNotEmpty(value, () => {
       const values = params.split(',').map((item) => item.trim());
 
