@@ -28,7 +28,7 @@
         :class="{ [visibleCssClass]: visibleFor('confirm') }"
       >
         <p v-html="message"></p>
-        <nav>
+        <div>
           <span class="small button" v-if="!processing" @click="makeCall"
             >YES</span
           >
@@ -36,7 +36,7 @@
             ><i class="fas fa-spinner fa-spin fa-fw"></i> YES</span
           >
           <span class="small success button" @click="clear">NO</span>
-        </nav>
+        </div>
       </div>
     </div>
   </base-top-dialog>
