@@ -16,7 +16,7 @@ export default {
       if (this.isSelected(value)) {
         this.selected = this.selected.filter((element) => element !== value);
       } else {
-        this.selected.push(value);
+        this.selected.push(isNaN(value) ? value : Number(value));
       }
       this.emit(this.selected);
     },
