@@ -3,12 +3,14 @@
     <slot
       :group="group"
       :fields="fields"
+      :storageData="storageData"
       :summary="summaryBag"
       :validation="validationBag"
       :error="error"
       :reset="reset"
       :clear="clear"
       :submit="submit"
+      :combinedData="combinedData"
       :enable="enable"
       :disable="disable"
       :enableEvent="enableEvent"
@@ -66,6 +68,14 @@ export default {
         return {};
       },
     },
+    localStorageId: {
+      type: String,
+      default: null,
+    },
+    sessionStorageId: {
+      type: String,
+      default: null,
+    },
   },
   data() {
     return {
@@ -75,11 +85,17 @@ export default {
       summaryBag: this.summary,
       rule: Rule,
       message: null,
+      storageInstance: null,
+      storageId: null,
+      storageData: {},
     };
   },
   computed: {
     requestData() {
       return this.mutate({ ...this.fields });
+    },
+    combinedData() {
+      return { ...this.storageData, ...this.fields };
     },
   },
   created() {
@@ -92,6 +108,9 @@ export default {
     window.EventBus.listen('disable-ended-' + this.group, this.enable);
     window.EventBus.listen('remove-field-' + this.group, this.removeField);
     window.EventBus.listen('update-summary-' + this.group, this.updateSummary);
+
+    this.setStorage();
+    this.getStorageData();
   },
   mounted() {
     if (this.isDisabled) {
@@ -99,6 +118,36 @@ export default {
     }
   },
   methods: {
+    setStorage() {
+      if (this.sessionStorageId) {
+        this.storageInstance = window.sessionStorage;
+        this.storageId = this.sessionStorageId;
+        return;
+      }
+
+      if (this.localStorageId) {
+        this.storageInstance = window.localStorage;
+        this.storageId = this.localStorageId;
+      }
+    },
+    getStorageData() {
+      if (!this.storageInstance) {
+        return;
+      }
+
+      this.storageData = JSON.parse(
+        this.storageInstance.getItem(this.storageId)
+      );
+    },
+    setStorageData(data) {
+      if (!this.storageInstance) {
+        return;
+      }
+      if (data.captcha) {
+        delete data.captcha;
+      }
+      this.storageInstance.setItem(this.storageId, JSON.stringify(data));
+    },
     startProcessingAjaxCallEvent() {
       window.EventBus.fire([
         'submission-started-' + this.group,
@@ -204,6 +253,7 @@ export default {
     },
     callSuccessful(response) {
       try {
+        this.setStorageData(this.combinedData);
         Behaviour[this.behaviour ? this.behaviour : response.data.behaviour](
           this,
           response

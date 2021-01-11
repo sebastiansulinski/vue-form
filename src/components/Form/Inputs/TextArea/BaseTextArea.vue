@@ -19,7 +19,9 @@ export default {
     },
   },
   mounted() {
-    this.currentBody = this.$slots.body ? this.$slots.body[0].text : '';
+    this.currentBody = this.$slots.body
+      ? this.$slots.body[0].text
+      : this.currentValue;
     this.reset();
     this.initialize();
     this.registerListeners();
