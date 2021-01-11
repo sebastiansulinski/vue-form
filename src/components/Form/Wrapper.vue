@@ -208,6 +208,7 @@ export default {
           this,
           response
         );
+        window.EventBus.fire('submission-successful-' + this.group);
       } catch (error) {
         ErrorReporter.report(
           'Invalid form behaviour: ' + this.behaviour,
@@ -218,15 +219,16 @@ export default {
       }
     },
     callFailed(error) {
+      if (((error.response || {}).data || {}).errors) {
+        this.setServerErrors(error.response.data.errors);
+      }
+      window.EventBus.fire('submission-failed-' + this.group, this.error);
       if (
         (error.response || {}).status &&
         [301, 302].includes(error.response.status)
       ) {
         Behaviour['redirect'](this, error.response);
         return;
-      }
-      if (((error.response || {}).data || {}).errors) {
-        this.setServerErrors(error.response.data.errors);
       }
       ErrorReporter.report(
         error,
