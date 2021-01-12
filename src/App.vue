@@ -117,6 +117,7 @@
         enableEvent,
       }"
       :mutators="{ price: (value) => parseInt(value.replace('.', '')) }"
+      error-message="OMG, that is not the right input at all!"
       v-cloak
     >
       <fieldset class="fieldset">

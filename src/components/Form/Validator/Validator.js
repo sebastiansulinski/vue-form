@@ -38,7 +38,7 @@ export default class Validator {
           try {
             if (!Rule[rule](value, params)) {
               this.errors[field] = rule;
-              reject('Your input was invalid.');
+              reject();
             }
           } catch (error) {
             // reject("Invalid form validation rule '" + rule + "'.");

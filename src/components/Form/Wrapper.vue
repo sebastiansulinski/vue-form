@@ -76,6 +76,10 @@ export default {
       type: String,
       default: null,
     },
+    errorMessage: {
+      type: String,
+      default: 'Please complete all mandatory fields below',
+    },
   },
   data() {
     return {
@@ -281,7 +285,7 @@ export default {
         return;
       }
       ErrorReporter.report(
-        error,
+        ErrorReporter.message(error, this.errorMessage),
         this.group,
         null,
         this.stopProcessingAjaxCall
