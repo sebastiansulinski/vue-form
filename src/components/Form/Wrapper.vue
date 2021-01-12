@@ -80,6 +80,10 @@ export default {
       type: String,
       default: 'Please complete all mandatory fields below',
     },
+    clearStorage: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
@@ -151,6 +155,12 @@ export default {
         delete data.captcha;
       }
       this.storageInstance.setItem(this.storageId, JSON.stringify(data));
+    },
+    removeStorageData() {
+      if (!this.clearStorage || !this.storageInstance) {
+        return;
+      }
+      this.storageInstance.removeItem(this.storageId);
     },
     startProcessingAjaxCallEvent() {
       window.EventBus.fire([
@@ -258,6 +268,7 @@ export default {
     callSuccessful(response) {
       try {
         this.setStorageData(this.combinedData);
+        this.removeStorageData();
         Behaviour[this.behaviour ? this.behaviour : response.data.behaviour](
           this,
           response
