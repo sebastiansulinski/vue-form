@@ -143,9 +143,8 @@ export default {
         return;
       }
 
-      this.storageData = JSON.parse(
-        this.storageInstance.getItem(this.storageId)
-      );
+      this.storageData =
+        JSON.parse(this.storageInstance.getItem(this.storageId)) || {};
     },
     setStorageData(data) {
       if (!this.storageInstance) {
