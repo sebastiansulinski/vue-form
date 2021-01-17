@@ -11,6 +11,7 @@
       :clear="clear"
       :submit="submit"
       :combinedData="combinedData"
+      :updateStorageData="updateStorageData"
       :enable="enable"
       :disable="disable"
       :enableEvent="enableEvent"
@@ -160,6 +161,12 @@ export default {
         return;
       }
       this.storageInstance.removeItem(this.storageId);
+    },
+    updateStorageData(field, value) {
+      this.setStorageData({
+        ...this.combinedData,
+        ...{ [field]: value },
+      });
     },
     startProcessingAjaxCallEvent() {
       window.EventBus.fire([

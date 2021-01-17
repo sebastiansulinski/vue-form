@@ -20,7 +20,7 @@ export default {
       this.emit((this.selected = []));
     },
     isSelected(value) {
-      return this.selected.includes(value);
+      return this.selected.includes(value.toString());
     },
   },
 };
