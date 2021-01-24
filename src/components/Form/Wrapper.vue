@@ -4,14 +4,14 @@
       :group="group"
       :fields="fields"
       :storageData="storageData"
+      :combinedData="combinedData"
+      :updateStorageData="updateStorageData"
       :summary="summaryBag"
       :validation="validationBag"
       :error="error"
       :reset="reset"
       :clear="clear"
       :submit="submit"
-      :combinedData="combinedData"
-      :updateStorageData="updateStorageData"
       :enable="enable"
       :disable="disable"
       :enableEvent="enableEvent"
@@ -69,21 +69,27 @@ export default {
         return {};
       },
     },
-    localStorageId: {
-      type: String,
-      default: null,
-    },
-    sessionStorageId: {
-      type: String,
-      default: null,
-    },
     errorMessage: {
       type: String,
       default: 'Please complete all mandatory fields below',
     },
-    clearStorage: {
-      type: Boolean,
-      default: true,
+    storageData: {
+      type: Object,
+      default: () => {},
+    },
+    setStorageData: {
+      type: Function,
+      default: () => {},
+    },
+    removeStorageData: {
+      type: Function,
+      default: () => {},
+    },
+    callFailedCallback: {
+      type: Function,
+      default: (error, callback) => {
+        callback();
+      },
     },
   },
   data() {
@@ -94,9 +100,6 @@ export default {
       summaryBag: this.summary,
       rule: Rule,
       message: null,
-      storageInstance: null,
-      storageId: null,
-      storageData: {},
     };
   },
   computed: {
@@ -117,9 +120,6 @@ export default {
     window.EventBus.listen('disable-ended-' + this.group, this.enable);
     window.EventBus.listen('remove-field-' + this.group, this.removeField);
     window.EventBus.listen('update-summary-' + this.group, this.updateSummary);
-
-    this.setStorage();
-    this.getStorageData();
   },
   mounted() {
     if (this.isDisabled) {
@@ -127,41 +127,6 @@ export default {
     }
   },
   methods: {
-    setStorage() {
-      if (this.sessionStorageId) {
-        this.storageInstance = window.sessionStorage;
-        this.storageId = this.sessionStorageId;
-        return;
-      }
-
-      if (this.localStorageId) {
-        this.storageInstance = window.localStorage;
-        this.storageId = this.localStorageId;
-      }
-    },
-    getStorageData() {
-      if (!this.storageInstance) {
-        return;
-      }
-
-      this.storageData =
-        JSON.parse(this.storageInstance.getItem(this.storageId)) || {};
-    },
-    setStorageData(data) {
-      if (!this.storageInstance) {
-        return;
-      }
-      if (data.captcha) {
-        delete data.captcha;
-      }
-      this.storageInstance.setItem(this.storageId, JSON.stringify(data));
-    },
-    removeStorageData() {
-      if (!this.clearStorage || !this.storageInstance) {
-        return;
-      }
-      this.storageInstance.removeItem(this.storageId);
-    },
     updateStorageData(field, value) {
       this.setStorageData({
         ...this.combinedData,
@@ -290,23 +255,25 @@ export default {
       }
     },
     callFailed(error) {
-      if (((error.response || {}).data || {}).errors) {
-        this.setServerErrors(error.response.data.errors);
-      }
-      window.EventBus.fire('submission-failed-' + this.group, this.error);
-      if (
-        (error.response || {}).status &&
-        [301, 302].includes(error.response.status)
-      ) {
-        Behaviour['redirect'](this, error.response);
-        return;
-      }
-      ErrorReporter.report(
-        ErrorReporter.message(error, this.errorMessage),
-        this.group,
-        null,
-        this.stopProcessingAjaxCall
-      );
+      this.callFailedCallback(error, () => {
+        if (((error.response || {}).data || {}).errors) {
+          this.setServerErrors(error.response.data.errors);
+        }
+        window.EventBus.fire('submission-failed-' + this.group, this.error);
+        if (
+          (error.response || {}).status &&
+          [301, 302].includes(error.response.status)
+        ) {
+          Behaviour['redirect'](this, error.response);
+          return;
+        }
+        ErrorReporter.report(
+          ErrorReporter.message(error, this.errorMessage),
+          this.group,
+          null,
+          this.stopProcessingAjaxCall
+        );
+      });
     },
     setServerErrors(errors) {
       Object.keys(errors).forEach((key) => {
