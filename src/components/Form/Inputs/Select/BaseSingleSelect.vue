@@ -22,7 +22,7 @@ export default {
   },
   data() {
     return {
-      selected: this.currentValue,
+      selected: this.currentValue || '',
       records: [],
     };
   },
@@ -41,7 +41,7 @@ export default {
   },
   created() {
     if (this.listen) {
-      const handler = selected => {
+      const handler = (selected) => {
         this.selected = selected;
         this.change();
       };
