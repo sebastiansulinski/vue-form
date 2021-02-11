@@ -267,12 +267,16 @@ export default {
           Behaviour['redirect'](this, error.response);
           return;
         }
-        ErrorReporter.report(
-          ErrorReporter.message(error, this.errorMessage),
-          this.group,
-          null,
-          this.stopProcessingAjaxCall
-        );
+        if (error?.response?.data?.behaviour) {
+          Behaviour[error.response.data.behaviour](this, error.response);
+        } else {
+          ErrorReporter.report(
+            ErrorReporter.message(error, this.errorMessage),
+            this.group,
+            null,
+            this.stopProcessingAjaxCall
+          );
+        }
       });
     },
     setServerErrors(errors) {

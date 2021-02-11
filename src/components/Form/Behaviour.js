@@ -13,6 +13,12 @@ export default class Behaviour {
     Behaviour.confirm(form, response);
   }
 
+  static clearStorageReload(form) {
+    form.removeStorageData();
+
+    Behaviour.reload();
+  }
+
   static message(form, response) {
     form.enable();
     form.reset();
