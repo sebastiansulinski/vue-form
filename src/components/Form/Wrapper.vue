@@ -153,7 +153,7 @@ export default {
       };
     },
     deinitialize(field) {
-      if (this.validationBag.hasOwnProperty(field)) {
+      if (Object.prototype.hasOwnProperty.call(this.validationBag, field)) {
         delete this.validationBag[field];
       }
       this.removeField(field);

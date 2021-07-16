@@ -32,7 +32,7 @@ export default class Validator {
         value = this.getValue(field);
 
       for (const index in rules) {
-        if (!this.errors.hasOwnProperty(field)) {
+        if (!Object.prototype.hasOwnProperty.call(this.errors, field)) {
           let [rule, params] = rules[index].split(':');
 
           try {

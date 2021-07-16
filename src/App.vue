@@ -16,10 +16,9 @@
             @click="trigger"
           >
             <span v-if="!processing">
-              <i class="fas fa-check fa-fw"></i> SUBMIT
+              SUBMIT
             </span>
             <span v-else>
-              <i class="fas fa-spinner fa-spin fa-fw"></i>
               PROCESSING
             </span>
           </span>
@@ -37,7 +36,7 @@
             v-cloak
           >
             <span class="secondary button" @click="trigger" v-if="!isDisabled">
-              <i class="fas fa-power-off fa-fw"></i> DISABLE
+              DISABLE
             </span>
           </form-trigger>
 
@@ -49,7 +48,7 @@
             v-cloak
           >
             <span class="success button" @click="trigger" v-if="isDisabled">
-              <i class="fas fa-power-off fa-fw"></i> ENABLE
+              ENABLE
             </span>
           </form-trigger>
 
@@ -65,10 +64,9 @@
               @click="trigger"
             >
               <span v-if="!processing">
-                <i class="fas fa-eraser fa-fw"></i> RESET
+                RESET
               </span>
               <span v-else>
-                <i class="fas fa-spinner fa-spin fa-fw"></i>
                 PROCESSING
               </span>
             </span>
@@ -86,10 +84,9 @@
               @click="trigger"
             >
               <span v-if="!processing">
-                <i class="fas fa-times fa-fw"></i> CLEAR
+                CLEAR
               </span>
               <span v-else>
-                <i class="fas fa-spinner fa-spin fa-fw"></i>
                 PROCESSING
               </span>
             </span>
@@ -597,10 +594,10 @@
             v-show="!processing"
             :disabled="isDisabled"
           >
-            <i class="fas fa-check fa-fw"></i> SUBMIT
+            SUBMIT
           </button>
           <button type="button" disabled class="button" v-show="processing">
-            <i class="fas fa-spinner fa-spin fa-fw"></i> PROCESSING
+            PROCESSING
           </button>
         </div>
 
@@ -614,7 +611,7 @@
               @click="disableEvent"
               v-if="!isDisabled"
             >
-              <i class="fas fa-power-off fa-fw"></i> DISABLE
+              DISABLE
             </button>
             <button
               type="button"
@@ -622,7 +619,7 @@
               @click="enableEvent"
               v-if="isDisabled"
             >
-              <i class="fas fa-power-off fa-fw"></i> ENABLE
+              ENABLE
             </button>
             <button
               type="button"
@@ -630,7 +627,7 @@
               @click="reset"
               :disabled="isDisabled"
             >
-              <i class="fas fa-eraser fa-fw"></i> RESET
+              RESET
             </button>
             <button
               type="button"
@@ -638,7 +635,7 @@
               @click="clear"
               :disabled="isDisabled"
             >
-              <i class="fas fa-times fa-fw"></i> CLEAR
+              CLEAR
             </button>
           </nav>
         </div>

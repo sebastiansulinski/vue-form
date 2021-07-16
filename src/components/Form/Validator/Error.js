@@ -20,7 +20,7 @@ export default class Error {
   }
 
   has(field, rule = null) {
-    const hasProperty = this.errors.hasOwnProperty(field);
+    const hasProperty = Object.prototype.hasOwnProperty.call(this.errors, field);
 
     if (rule === null) {
       return hasProperty;
