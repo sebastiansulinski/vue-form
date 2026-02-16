@@ -1,5 +1,8 @@
 # Vue Form Component
 
+> **Warning**
+> This package is deprecated and no longer maintained.
+
 Set of components to handle your online form interaction.
 
 You'll find most of the instructions below, but to have a more in depth understanding of how this set of components works, you might want to watch [Advanced VueJs Form Component](https://www.youtube.com/watch?v=DHCa0ZdBXcY&list=PLpxd8S-CfPhMfjmgoIstBbfO3daFmIGz5) series, which shows how it's been built step by step and explains all design decisions.
